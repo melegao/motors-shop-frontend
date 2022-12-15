@@ -1,13 +1,20 @@
-import './App.css';
-import { ToastContainer } from "react-toastify";
+import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
-import Ways from './routes/routes';
+
+import { ToastContainer } from "react-toastify";
+import { ThemeProvider } from "styled-components";
+
+import Ways from "./routes/routes";
+import globaltheme from "./styles/themes/globaltheme";
 
 function App() {
   return (
     <>
-      <Ways />
-      <ToastContainer />
+      <ThemeProvider theme={globaltheme}>
+        <Ways />
+
+        <ToastContainer />
+      </ThemeProvider>
     </>
   );
 }

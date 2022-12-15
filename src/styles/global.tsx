@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
     * {
@@ -49,7 +49,7 @@ export default createGlobalStyle`
     }
 
     body, input, button {
-        font-family: 'Inter', serif;
+        font-family: 'Inter', sans-serif;
         font-size: 1rem;
     }
 
@@ -60,4 +60,4 @@ export default createGlobalStyle`
     a {
         text-decoration: none;
     }
-`
+`;
