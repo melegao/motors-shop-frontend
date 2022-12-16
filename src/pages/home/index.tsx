@@ -1,10 +1,11 @@
+import Header from "../../components/header"
 
 
 function Home () {
 
     return (
         <>
-            Teste
+            <Header />
         </>
     )
 }
