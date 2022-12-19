@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from '../pages/home'
+import ProductDetails from '../pages/productDetails'
 
 function Ways () {
 
@@ -7,6 +8,7 @@ function Ways () {
         <>
             <Routes>
                 <Route path='/' element={<Home />}/>
+                <Route path='/produto' element={<ProductDetails />}/>
             </Routes>
         </>
     )
