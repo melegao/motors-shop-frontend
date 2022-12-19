@@ -5,7 +5,7 @@ export const ContainerHeader = styled.div`
 
 
 
-    @media (min-width: 800px) {
+@media (min-width: 800px) {
         
     display: flex;
     justify-content: space-between;
@@ -37,6 +37,7 @@ export const ContainerHeader = styled.div`
     }
 
     .header-menu-active {
+        
         display: flex;
         align-items: center;
         height: 100%;
@@ -91,6 +92,7 @@ export const ContainerHeader = styled.div`
     }
 
     .header-menu-active {
+        z-index: 10;
         position: absolute;
         top: 12vh;
         right: 0;

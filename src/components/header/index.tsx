@@ -2,6 +2,7 @@ import { useState } from "react"
 import { ContainerHeader } from "./styles"
 import logo from '../../assets/logo/logo-motors-shop.svg'
 import { useNavigate } from "react-router-dom";
+import { Button } from "../Button/style";
 
 function Header () {
 
@@ -47,7 +48,7 @@ function Header () {
                 :
                     <div className="teste">
                         <p>Fazer Login</p>
-                        <button>Cadastar</button>
+                        <Button>Cadastrar</Button>
                     </div>
                     
                 }
