@@ -77,6 +77,20 @@ export const Button = styled.button<ButtonProps>`
           border: 1px solid var(--grey10);
         `;
 
+      case "Outline1":
+        return css`
+          color: var(--grey0);
+          background-color: var(--whiteFixed);
+          border: 1px solid var(--grey1);
+        `;
+
+      case "Outline2":
+        return css`
+          color: var(--grey0);
+          background-color: var(--whiteFixed);
+          border: 1px solid var(--grey4);
+        `;
+
       case "OutlineBrand":
         return css`
           color: var(--brand1);
