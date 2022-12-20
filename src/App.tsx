@@ -7,10 +7,9 @@ import GlobalStyle from "./styles/global";
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <Ways />
-
-      <ToastContainer />
+        <GlobalStyle />
+        <Ways />
+        <ToastContainer />
     </>
   );
 }
