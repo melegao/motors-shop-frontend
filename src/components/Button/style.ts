@@ -58,6 +58,18 @@ export const Button = styled.button<ButtonProps>`
           }
         `;
 
+      case "BrandNew":
+        return css`
+          color: var(--whiteFixed);
+          background-color: var(--brand1);
+          border: 1px solid var(--grey10);
+
+          &:hover {
+            background-color: var(--brand2);
+            border: 1px solid var(--brand2);
+          }
+        `;
+
       case "BrandOpacity":
         return css`
           color: var(--brand1);
