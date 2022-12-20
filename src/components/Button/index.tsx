@@ -2,11 +2,12 @@ import { ReactNode } from "react";
 import { Button } from "./style";
 
 type ButtonProps = {
-  type: "button" | "reset" | "submit";
+  type?: "button" | "reset" | "submit";
   children: ReactNode | string;
   onClick?: () => void;
-  sizebutton?: "default" | "medium";
+  sizebutton?: "default" | "medium" | "login";
   colorbutton?: string;
+  width?: string;
 };
 
 export const ButtonBase = ({
@@ -15,9 +16,11 @@ export const ButtonBase = ({
   onClick,
   sizebutton,
   colorbutton,
+  width,
 }: ButtonProps) => {
   return (
     <Button
+      width={width}
       type={type}
       onClick={onClick}
       sizebutton={sizebutton}

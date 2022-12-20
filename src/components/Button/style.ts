@@ -3,9 +3,11 @@ import styled, { css } from "styled-components";
 interface ButtonProps {
   sizebutton?: string;
   colorbutton?: string;
+  width?: string;
 }
 
 export const Button = styled.button<ButtonProps>`
+  width: ${(props) => props.width};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,6 +79,28 @@ export const Button = styled.button<ButtonProps>`
           border: 1px solid var(--grey10);
         `;
 
+      case "LightLogin":
+        return css`
+          color: var(--grey2);
+          justify-content: flex-end;
+          background-color: var(--grey10);
+          border: 1px solid var(--grey10);
+        `;
+
+      case "Outline1":
+        return css`
+          color: var(--grey0);
+          background-color: var(--whiteFixed);
+          border: 1px solid var(--grey1);
+        `;
+
+      case "Outline2":
+        return css`
+          color: var(--grey0);
+          background-color: var(--whiteFixed);
+          border: 1px solid var(--grey4);
+        `;
+
       case "OutlineBrand":
         return css`
           color: var(--brand1);
@@ -142,6 +166,12 @@ export const Button = styled.button<ButtonProps>`
         return css`
           font-size: 0.875rem;
           padding: 0.25rem 0.7rem;
+        `;
+
+      case "login":
+        return css`
+          font-size: 0.875rem;
+          padding: 0.25rem 0rem;
         `;
 
       default:
