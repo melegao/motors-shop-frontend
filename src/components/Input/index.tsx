@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { InputStyled, StyledDiv } from "./style";
+import { FieldError } from "react-hook-form";
 
 interface InputProps {
   label?: string;
@@ -8,7 +9,7 @@ interface InputProps {
   type?: string;
   register?: any;
   name?: string;
-  error?: string;
+  error?: any;
   width: string;
 }
 
@@ -24,26 +25,29 @@ export const InputBase = ({
   ...rest
 }: InputProps) => {
   return (
-    <StyledDiv>
-      <div>
+    <StyledDiv width={width}>
+      <div className="label--input">
         <label>
           <p>{label}</p>
         </label>
       </div>
-
-      <InputStyled
-        placeholder={placeholder}
-        type={type}
-        width={width}
-        {...(register !== undefined && register(name))}
-        {...rest}
-      >
-        {children}
-      </InputStyled>
+      <div>
+        <InputStyled
+          placeholder={placeholder}
+          type={type}
+          width={width}
+          {...(register !== undefined && register(name))}
+          {...rest}
+        >
+          {children}
+        </InputStyled>
+      </div>
 
       {error !== undefined && (
-        <div>
-          <p>{error}</p>
+        <div className="label--error">
+          <label>
+            <p>{error}</p>
+          </label>
         </div>
       )}
     </StyledDiv>

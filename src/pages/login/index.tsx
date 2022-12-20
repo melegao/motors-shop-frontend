@@ -1,11 +1,16 @@
 import Header from "../../components/header";
-import { LoginContainer } from "./style";
+import { FormLogin } from "./FormLogin";
+import { ColorContainer, LoginContainer } from "./style";
 
 export const LoginPage = () => {
   return (
     <>
-      <Header />
-      <LoginContainer></LoginContainer>
+      <ColorContainer>
+        <Header />
+        <LoginContainer>
+          <FormLogin />
+        </LoginContainer>
+      </ColorContainer>
     </>
   );
 };

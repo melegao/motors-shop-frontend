@@ -9,7 +9,7 @@ export const InputStyled = styled.input<InputProps>`
   padding: 0.6rem;
   background-color: var(--whiteFixed);
   color: var(--grey-0);
-  border: 0.1rem solid var(--grey8);
+  border: 0.12rem solid var(--grey8);
   border-radius: 0.2rem;
 
   &:hover {
@@ -22,25 +22,32 @@ export const InputStyled = styled.input<InputProps>`
   }
 `;
 
-export const StyledDiv = styled.div`
+export const StyledDiv = styled.div<InputProps>`
   display: flex;
   flex-direction: column;
-  margin: 20px 20px;
   width: 100%;
   gap: 0.5rem;
 
+  .label--input,
+  .label--error {
+    width: ${(props) => props.width};
+    justify-content: flex-start;
+    margin: 0 auto;
+  }
+
   div {
-    width: 90%;
+    width: 100%;
     display: flex;
-    align-items: flex-start;
+    justify-content: center;
   }
 
   div > label > p {
     font-size: 0.875rem;
   }
 
-  div > p {
+  .label--error > label > p {
     font-size: 0.875rem;
     color: var(--alert1);
+    font-style: italic;
   }
 `;
