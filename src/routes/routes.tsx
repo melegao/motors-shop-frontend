@@ -3,6 +3,7 @@ import Home from "../pages/home";
 import ProductDetails from "../pages/productDetails";
 import { LoginPage } from "../pages/login";
 import Admin from "../pages/admin";
+import ProfileViewUser from "../pages/profileViewUser";
 
 function Ways() {
   return (
@@ -12,6 +13,7 @@ function Ways() {
         <Route path="/produto" element={<ProductDetails />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/profile" element={<ProfileViewUser />} />
       </Routes>
     </>
   );
