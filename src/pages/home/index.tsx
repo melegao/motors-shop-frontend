@@ -1,5 +1,6 @@
 import { Button } from "../../components/Button/style"
 import CarouselProducts from "../../components/CarouselProducts"
+import Footer from "../../components/Footer"
 import Header from "../../components/header"
 import { HomeContainer } from "./styles"
 
@@ -35,6 +36,7 @@ function Home () {
                     <CarouselProducts props="motorcycles"/>
                 </div>
             </HomeContainer>
+            <Footer />
         </>
     )
 }
