@@ -8,8 +8,8 @@ export const InputStyled = styled.input<InputProps>`
   width: ${(props) => props.width};
   padding: 0.6rem;
   background-color: var(--whiteFixed);
-  color: var(--grey-0);
-  border: 0.12rem solid var(--grey8);
+  color: var(--grey0);
+  border: 0.12rem solid var(--grey7);
   border-radius: 0.2rem;
 
   &:hover {
