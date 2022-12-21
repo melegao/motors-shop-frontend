@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/style";
 
 function Header() {
-  // const navigate = useNavigate(); SERÁ UTILIZADO PARA NAVEGAÇÃO
+  const navigate = useNavigate()
 
   const [logged, setLogged] = useState(false); // ESSE STATE DEVERÁ SER SUBSTITUÍDO POR UM PROVIDER.
 
@@ -24,7 +24,7 @@ function Header() {
 
   return (
     <ContainerHeader>
-      <div>
+      <div onClick={() => navigate('/')} className='header-logo'>
         <img src={logo} alt="Motors Shop" />
       </div>
       <div className="mobile-menu" onClick={() => handleHeaderMenu()}>

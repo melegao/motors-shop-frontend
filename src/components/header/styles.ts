@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 export const ContainerHeader = styled.div`
 
+    .header-logo{
+        cursor: pointer;
+    }
 
 
 @media (min-width: 800px) {

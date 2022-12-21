@@ -180,7 +180,7 @@ export const HomeContainer = styled.div`
 
         .div-carros{
 
-            padding: 38px 0px 0px 60px;
+            padding: 38px 0px 50px 60px;
             display: flex;
             flex-direction: column;
             gap: 37px;
@@ -197,7 +197,7 @@ export const HomeContainer = styled.div`
 
         .div-motos{
 
-            padding: 38px 0px 0px 60px;
+            padding: 38px 0px 50px 60px;
             display: flex;
             flex-direction: column;
             gap: 37px;

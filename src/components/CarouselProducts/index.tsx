@@ -1,23 +1,32 @@
 import CardProdut from "../CardProduct";
 import { CarouselProductsContainer } from "./styles";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useVehicleContext } from "../../context/ProductContext";
+
 
 function CarouselProducts({ props }: any) {
-  const [products, setProducts] = useState([]);
+
+  const { allCars, setAllCars, allMotorcycles, setAllMotorcycles } = useVehicleContext()
 
   useEffect(() => {
     axios
       .get(`http://localhost:3333/${props}`)
-      .then((res) => setProducts(res.data))
+      .then((res) => {props === 'cars'? setAllCars(res.data) : setAllMotorcycles(res.data)})
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <CarouselProductsContainer>
-      {products?.map((product, index) => (
-        <CardProdut key={index} product={product} />
-      ))}
+      {props === 'cars'? 
+        allCars?.map((product, index) => (
+          <CardProdut key={product.id} product={product} />
+        ))
+      :
+        allMotorcycles?.map((product, index) => (
+          <CardProdut key={product.id} product={product} />
+        ))
+      }
     </CarouselProductsContainer>
   );
 }
