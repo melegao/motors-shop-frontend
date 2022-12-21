@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
     * {
@@ -43,6 +43,7 @@ export default createGlobalStyle`
         --random10: #6100FF;
         --random11: #5700E3;
         --random12: #30007D;
+        --black: #000
     }
     body{
         background-color: #fff;
@@ -65,4 +66,4 @@ export default createGlobalStyle`
     ol, ul {
         list-style: none;
     }
-`
+`;
