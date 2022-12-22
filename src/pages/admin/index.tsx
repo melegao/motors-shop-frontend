@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CarouselProducts from "../../components/CarouselProducts";
 import CreateProductModal from "../../components/CreateProductModal";
+import Footer from "../../components/Footer";
 import Header from "../../components/header";
 import { BlueDiv, Container, Content, UserDiv } from "./styles";
 
@@ -54,6 +55,7 @@ function Admin() {
           </div>
         </Content>
       </Container>
+      <Footer />
     </>
   );
 }
