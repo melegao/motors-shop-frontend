@@ -12,12 +12,11 @@ export const Container = styled.div`
   .modal {
     max-width: 450px;
     width: 95%;
-    height: 1000px;
 
     background-color: var(--whiteFixed);
     position: absolute;
 
-    border-radius: 10px;
+    border-radius: 8px;
     inset: 0;
     margin: 1rem auto;
     animation: fadeInModalChat 1s ease-in-out backwards;
@@ -43,7 +42,7 @@ export const Container = styled.div`
         display: flex;
         gap: 1rem;
 
-        button {
+        .notSelected {
           background-color: var(--whiteFixed);
 
           color: var(--grey0);
@@ -58,6 +57,26 @@ export const Container = styled.div`
 
           &:hover {
             background-color: var(--brand1);
+            color: var(--whiteFixed);
+            border: none;
+          }
+        }
+
+        .selected {
+          background-color: var(--brand1);
+
+          color: var(--whiteFixed);
+          font-size: 16px;
+          font-weight: 600;
+
+          border: none;
+          border-radius: 4px;
+
+          width: 100%;
+          height: 48px;
+
+          &:hover {
+            background-color: var(--brand3);
             color: var(--whiteFixed);
             border: none;
           }
