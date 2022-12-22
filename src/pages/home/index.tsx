@@ -27,9 +27,6 @@ function Home () {
                 <div className="div-carros">
                     <h3>Carros</h3>
                     <CarouselProducts props="cars"/>
-                    {/* <div>
-                        <CardProdut />
-                    </div> */}
                 </div>
                 <div className="div-motos">
                     <h3>Motos</h3>

@@ -10,6 +10,7 @@ export const CarouselProductsContainer = styled.div`
     @media (min-width: 800px) {
         gap: 48px;
         padding-bottom: 12px;
+        overflow-x: auto;
         
     }
 
