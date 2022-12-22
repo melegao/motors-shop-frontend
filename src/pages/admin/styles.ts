@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
+
   background-color: var(--grey8);
 
   display: flex;
@@ -15,6 +15,21 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  .auction {
+    padding: 38px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 37px;
+
+    h3 {
+      font-family: "Lexend", sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 30px;
+    }
+  }
 
   .cars {
     padding: 38px 12px;
@@ -43,6 +58,53 @@ export const Content = styled.div`
       font-weight: 600;
       font-size: 24px;
       line-height: 30px;
+    }
+  }
+
+  @media (min-width: 800px) {
+    .auction {
+      padding: 38px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 37px;
+
+      h3 {
+        font-family: "Lexend", sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 30px;
+      }
+    }
+
+    .cars {
+      padding: 38px 0 0 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 37px;
+
+      h3 {
+        font-family: "Lexend", sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 30px;
+      }
+    }
+
+    .motorcycles {
+      padding: 38px 0 0 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 37px;
+
+      h3 {
+        font-family: "Lexend", sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 30px;
+      }
     }
   }
 `;
