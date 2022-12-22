@@ -49,7 +49,14 @@ export const ProductContainer = styled.div`
             justify-content: center;
             align-items: center;
             border-radius: 4px;
+            height: 15rem;
+            
+            
         }
+
+        .cover-photo {
+                max-width: 250px;
+            }
 
 
         .div-resume {
@@ -121,8 +128,9 @@ export const ProductContainer = styled.div`
 
             div {
                 display: flex;
+                justify-content: space-around;
                 flex-wrap: wrap;
-                gap: 5.5px;
+                gap: 20px;
             }
         }
 
@@ -175,14 +183,17 @@ export const ProductContainer = styled.div`
         background-color: var(--grey8);
         display: flex;
         flex-direction: row;
+        justify-content: center;
         padding: 40px 180px;
         gap: 46px;
+        
 
         .div-container-desktop {
             display: flex;
             flex-direction: column;
             gap: 16px;
             background-color: var(--grey8);
+            
         }
 
         .div-cover-photo {
@@ -192,7 +203,13 @@ export const ProductContainer = styled.div`
             justify-content: center;
             align-items: center;
             border-radius: 4px;
+            width: 40rem;
+            height: 15rem;        
         }
+
+        .cover-photo {
+                max-width: 250px;
+            }
 
         .div-resume {
             z-index: 5;
@@ -204,16 +221,45 @@ export const ProductContainer = styled.div`
             padding: 28px;
             gap: 24px;
             border-radius: 4px;
+            width: 40rem;
         }
 
+        .div-resume-desktop{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 35rem;
+        }
+
+
+        .div-resume-feat {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+
+
+            span {
+                padding: 4px 8px;
+                background-color: var(--brand4);
+                font-family: 'Inter', sans-serif;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 24px;
+                color: var(--brand1);
+            }
+        }
+
+        .p-price {
+                font-family: 'Lexend', sans-serif;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 20px;
+                color: var(--grey1);
+            }
+
         .div-description {
-/* 
-            position: absolute;
-            width: 751px;
-            height: 213px;
-            left: 182px;
-            top: 770px; */
-            
             background-color: var(--grey10);
             display: flex;
             flex-direction: column;
@@ -235,6 +281,7 @@ export const ProductContainer = styled.div`
             display: flex;
             flex-direction: column;
             gap: 24px;
+            width: 30rem;
         }
 
         .div-photos {
@@ -242,13 +289,6 @@ export const ProductContainer = styled.div`
         }
 
         .div-photos-desktop {
-
-            /* position: absolute;
-            width: 440px;
-            height: 377px;
-            left: 979px;
-            top: 120px; */
-
             z-index: 5;
             background-color: var(--grey10);
             display: flex;
@@ -261,7 +301,7 @@ export const ProductContainer = styled.div`
             div {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 5.5px;
+                gap: 15px;
             }
         }
 
