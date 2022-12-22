@@ -7,11 +7,6 @@ export const Form = styled.form`
 
   width: 100%;
 
-  .flex-row {
-    display: flex;
-    gap: 1rem;
-  }
-
   .description {
     display: flex;
     flex-direction: column;
@@ -28,6 +23,7 @@ export const Form = styled.form`
       resize: none;
 
       padding: 0.6rem;
+      height: 5rem;
 
       &:hover {
         background-color: var(--grey8);
@@ -45,6 +41,12 @@ export const Form = styled.form`
         color: var(--grey3);
       }
     }
+
+    .label--error > label > p {
+      font-size: 0.875rem;
+      color: var(--alert1);
+      font-style: italic;
+    }
   }
 
   .choose-vehicle {
@@ -58,7 +60,7 @@ export const Form = styled.form`
       display: flex;
       gap: 1rem;
 
-      button {
+      .notSelected {
         background-color: var(--whiteFixed);
 
         color: var(--grey0);
@@ -76,9 +78,23 @@ export const Form = styled.form`
           color: var(--whiteFixed);
           border: none;
         }
+      }
 
-        &:active {
-          background-color: var(--brand1);
+      .selected {
+        background-color: var(--brand1);
+
+        color: var(--whiteFixed);
+        font-size: 16px;
+        font-weight: 600;
+
+        border: none;
+        border-radius: 4px;
+
+        width: 100%;
+        height: 48px;
+
+        &:hover {
+          background-color: var(--brand3);
           color: var(--whiteFixed);
           border: none;
         }
