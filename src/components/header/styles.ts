@@ -46,11 +46,15 @@ export const ContainerHeader = styled.div`
         height: 100%;
     }
 
-    .teste {
+    .login-area {
         display: flex;
         align-items: center;
         gap: 44px;
         padding-left: 44px;
+
+        p {
+            cursor: pointer;
+        }
     }
     
     ul {
@@ -120,7 +124,7 @@ export const ContainerHeader = styled.div`
         border-bottom: 1px solid var(--grey6);
     }
 
-    .teste {
+    .login-area {
         display: flex;
         flex-direction: column;
         gap: 44px;

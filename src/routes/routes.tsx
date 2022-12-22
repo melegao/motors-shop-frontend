@@ -10,7 +10,7 @@ function Ways() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/produto" element={<ProductDetails />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/profile" element={<ProfileViewUser />} />
