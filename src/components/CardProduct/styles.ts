@@ -14,6 +14,11 @@ export const CardProductContainer = styled.div`
         justify-content: center;
         max-width: 312px;
         height: 170px;
+        cursor: pointer;
+
+        :hover{
+            border: 1px solid var(--brand1);
+        }
     }
 
     .product-title {
@@ -28,6 +33,7 @@ export const CardProductContainer = styled.div`
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
+        cursor: pointer;
     }
 
     .product-description {

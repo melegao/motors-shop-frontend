@@ -2,11 +2,53 @@ import Header from "../../components/header"
 import Carro1 from '../../assets/images/carro1.png'
 import { ProductContainer } from "./styles"
 import { Button } from "../../components/Button/style"
+import { useVehicleContext } from "../../context/ProductContext"
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import Footer from "../../components/Footer"
+import api from "../../services/api"
 
 
 function ProductDetails () {
 
-    
+    interface IVehicle {
+        id: string;
+        name: string;
+        description: string;
+        km: string;
+        year: number
+        coverImage: string
+        price: string
+        createdAt: string
+        updatedAt: string
+        carImages?: {id: string, url: string}[]
+        motorcycleImages?: {id: string, url: string}[]
+    }
+
+
+    const { id } = useParams()
+
+    const type = id?.slice(37)
+    const newId = id?.slice(0, 36)
+
+    const [vehicle, setVehicle] = useState<IVehicle>()
+
+    console.log(type)
+
+
+    useEffect(() => {
+        api
+          .get(`${type}/${newId}`)
+          .then((res) => setVehicle(res.data))
+          .catch((err) => console.log(err));
+      }, []);
+
+    const { allCars, setAllCars, allMotorcycles, setAllMotorcycles } = useVehicleContext()
+
+    const car = allCars.find(function (elem) { return elem.id === newId})
+    const motorcycle = allCars.find(function (elem) { return elem.id === id})
+
+    console.log(vehicle)
 
     return (
         <>            
@@ -17,38 +59,35 @@ function ProductDetails () {
                 <div className="background-blue"></div>
                 <div className="div-container-desktop">
                     <div className="div-cover-photo">
-                        <img src={Carro1} alt='Carro'/>
+                        <img src={vehicle?.coverImage} alt='Carro' className="cover-photo"/>
                     </div>
                     <div className="div-resume">
-                            <h2>Mercedes Benz A 200 CGI</h2>
+                            <h2>{vehicle?.name}</h2>
+                            <div className="div-resume-desktop">
                             <div className="div-resume-feat">
-                                <span>2013</span>
-                                <span>0 KM</span>
+                                <span>{vehicle?.year}</span>
+                                <span>{vehicle?.km}</span>
                             </div>
-                            <p className="p-price">R$ 00.000,00</p>
+                            <p className="p-price">R$ {vehicle?.price.replace(".", ",")}</p>
+                            </div>
                             <Button colorbutton="Brand">Comprar</Button>
                     </div>
                     <div className="div-description">
                         <h2>Descrição</h2>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet ab officia, optio cupiditate perspiciatis 
-                            beatae necessitatibus. Esse in deleniti facere praesentium consectetur aut, tenetur quisquam 
-                            illo blanditiis fugit velit est?</p>
+                        <p>{vehicle?.description}</p>
                     </div>
                     <div className="div-photos">
                         <h2>Fotos</h2>
-                        <div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
+                        <div div-vehicles-photos>
+                            {type === 'cars'?
+                                <>
+                                {vehicle?.carImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width='100rem'/>)}
+                                </>
+                            :
+                                <>
+                                {vehicle?.motorcycleImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width='100rem'/>)}
+                                </>
+                            }
                         </div>
                     </div>
                     <div className="div-seller">
@@ -65,19 +104,16 @@ function ProductDetails () {
                 <div className="div-aside-desktop">
                     <div className="div-photos-desktop">
                         <h2>Fotos</h2>
-                        <div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
-                            <div>foto</div>
+                        <div className="div-vehicles-photos">
+                            {type === 'cars'?
+                                <>
+                                {vehicle?.carImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width='100rem'/>)}
+                                </>
+                            :
+                                <>
+                                {vehicle?.motorcycleImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width='100rem'/>)}
+                                </>
+                            }
                         </div>
                     </div>
                     <div className="div-seller-desktop">
@@ -92,6 +128,8 @@ function ProductDetails () {
                 </div>
 
             </ProductContainer>
+
+            <Footer />
         </>
     )
 }

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/style";
 
 function Header() {
+
   const navigate = useNavigate()
 
   const [logged, setLogged] = useState(false); // ESSE STATE DEVERÁ SER SUBSTITUÍDO POR UM PROVIDER.
@@ -40,10 +41,10 @@ function Header() {
         </ul>
 
         {logged ? (
-          <div className="teste">Olá Fulano</div>
+          <div className="login-area">Olá Fulano</div>
         ) : (
-          <div className="teste">
-            <p>Fazer Login</p>
+          <div className="login-area">
+            <p onClick={() => navigate('/login')}>Fazer Login</p>
             <Button colorbutton="Outline2">Cadastrar</Button>
           </div>
         )}
