@@ -33,22 +33,12 @@ function ProductDetails () {
 
     const [vehicle, setVehicle] = useState<IVehicle>()
 
-    console.log(type)
-
-
     useEffect(() => {
         api
           .get(`${type}/${newId}`)
           .then((res) => setVehicle(res.data))
           .catch((err) => console.log(err));
       }, []);
-
-    const { allCars, setAllCars, allMotorcycles, setAllMotorcycles } = useVehicleContext()
-
-    const car = allCars.find(function (elem) { return elem.id === newId})
-    const motorcycle = allCars.find(function (elem) { return elem.id === id})
-
-    console.log(vehicle)
 
     return (
         <>            
@@ -78,7 +68,7 @@ function ProductDetails () {
                     </div>
                     <div className="div-photos">
                         <h2>Fotos</h2>
-                        <div div-vehicles-photos>
+                        <div className="div-vehicles-photos">
                             {type === 'cars'?
                                 <>
                                 {vehicle?.carImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width='100rem'/>)}
