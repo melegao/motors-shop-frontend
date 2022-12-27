@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/style";
 
 function Header() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [logged, setLogged] = useState(false); // ESSE STATE DEVERÁ SER SUBSTITUÍDO POR UM PROVIDER.
 
@@ -25,7 +24,7 @@ function Header() {
 
   return (
     <ContainerHeader>
-      <div onClick={() => navigate('/')} className='header-logo'>
+      <div onClick={() => navigate("/")} className="header-logo">
         <img src={logo} alt="Motors Shop" />
       </div>
       <div className="mobile-menu" onClick={() => handleHeaderMenu()}>
@@ -44,8 +43,10 @@ function Header() {
           <div className="login-area">Olá Fulano</div>
         ) : (
           <div className="login-area">
-            <p onClick={() => navigate('/login')}>Fazer Login</p>
-            <Button colorbutton="Outline2">Cadastrar</Button>
+            <p onClick={() => navigate("/login")}>Fazer Login</p>
+            <Button colorbutton="Outline2" onClick={() => navigate("/sign")}>
+              Cadastrar
+            </Button>
           </div>
         )}
       </div>
