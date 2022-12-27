@@ -5,8 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { IModal } from "../../../interfaces/successModal.interfaces";
 
-export const FormSignIn = () => {
+export const FormSignIn: React.FC<IModal> = ({ setShowSuccessModal }) => {
   const [isBuyer, setIsBuyer] = useState(false);
   const [isSeller, setIsSeller] = useState(false);
 
@@ -75,6 +76,7 @@ export const FormSignIn = () => {
 
   const onSubmit = (data: object) => {
     console.log(data);
+    setShowSuccessModal(true);
   };
 
   return (
@@ -135,14 +137,13 @@ export const FormSignIn = () => {
           error={errors?.birthday?.message}
         ></InputBase>
 
-        <InputBase
-          width="50%"
-          type="text"
-          label="Descrição"
-          placeholder="Digitar descrição"
-          register={register}
-          name="description"
-        ></InputBase>
+        <div className="description">
+          <label>Descrição</label>
+          <textarea
+            placeholder="Digitar descrição"
+            {...register("description")}
+          ></textarea>
+        </div>
 
         <div className="subTitle">
           <h2>Infomações de endereço</h2>

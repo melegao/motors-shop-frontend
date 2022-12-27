@@ -67,6 +67,50 @@ export const StyledForm = styled.form`
     padding: 0.5rem 0rem;
   }
 
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 70%;
+
+    label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--black);
+    }
+
+    textarea {
+      border: 0.12rem solid var(--grey7);
+      resize: none;
+      font-family: "Inter";
+      font-size: 16px;
+      padding: 0.6rem;
+      height: 5rem;
+
+      &:hover {
+        background-color: var(--grey8);
+        border: 0.1rem solid var(--grey8);
+      }
+
+      &:focus {
+        outline: 0.1rem solid var(--brand2);
+      }
+
+      &::placeholder {
+        font-size: 16px;
+        font-family: "Inter";
+        font-weight: 400;
+        color: var(--grey3);
+      }
+    }
+
+    .label--error > label > p {
+      font-size: 0.875rem;
+      color: var(--alert1);
+      font-style: italic;
+    }
+  }
+
   @media (max-width: 425px) {
     width: 90%;
     .button--box > button {
