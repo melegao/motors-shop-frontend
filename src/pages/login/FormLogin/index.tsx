@@ -4,8 +4,11 @@ import { StyledForm } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export const FormLogin = () => {
+  const navigate = useNavigate();
+
   const schema = yup.object().shape({
     user: yup.string().required("Required field"),
     password: yup.string().required("Password required"),
@@ -65,9 +68,7 @@ export const FormLogin = () => {
           colorbutton="Outline2"
           width="50%"
           type="button"
-          onClick={() => {
-            console.log("Pagina de Cadastro");
-          }}
+          onClick={() => navigate("/sign")}
         >
           Cadastrar
         </ButtonBase>

@@ -42,6 +42,7 @@ export default createGlobalStyle`
         --random10: #6100FF;
         --random11: #5700E3;
         --random12: #30007D;
+        --random13: #757575 ;
         --black: #000
     }
     body{
