@@ -5,9 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { IModal } from "../../../interfaces/successModal.interfaces";
+import { IModalSuccess } from "../../../interfaces/successModal.interfaces";
 
-export const FormSignIn: React.FC<IModal> = ({ setShowSuccessModal }) => {
+export const FormSignIn: React.FC<IModalSuccess> = ({
+  setShowSuccessModal,
+}) => {
   const [isBuyer, setIsBuyer] = useState(false);
   const [isSeller, setIsSeller] = useState(false);
 
