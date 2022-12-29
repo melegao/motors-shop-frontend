@@ -166,6 +166,7 @@ export const Button = styled.button<ButtonProps>`
           color: var(--whiteFixed);
           background-color: var(--brand3);
           border: 1px solid var(--brand3);
+          cursor: not-allowed;
         `;
 
       default:
