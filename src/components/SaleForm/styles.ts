@@ -7,6 +7,12 @@ export const Form = styled.form`
 
   width: 100%;
 
+  background-color: var(--whiteFixed);
+
+  padding: 1rem;
+
+  border-radius: 8px;
+
   .description {
     display: flex;
     flex-direction: column;
