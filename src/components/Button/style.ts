@@ -46,6 +46,7 @@ export const Button = styled.button<ButtonProps>`
           color: var(--whiteFixed);
           background-color: var(--grey5);
           border: 1px solid var(--grey5);
+          cursor: not-allowed;
         `;
 
       case "Brand":

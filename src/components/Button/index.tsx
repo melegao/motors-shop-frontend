@@ -1,14 +1,14 @@
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { Button } from "./style";
 
-type ButtonProps = {
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: "button" | "reset" | "submit";
   children: ReactNode | string;
   onClick?: () => void;
   sizebutton?: "default" | "medium" | "login";
   colorbutton?: string;
   width?: string;
-};
+}
 
 export const ButtonBase = ({
   children,
@@ -17,7 +17,8 @@ export const ButtonBase = ({
   sizebutton,
   colorbutton,
   width,
-}: ButtonProps) => {
+  ...rest
+}: IButtonProps) => {
   return (
     <Button
       width={width}
@@ -25,6 +26,7 @@ export const ButtonBase = ({
       onClick={onClick}
       sizebutton={sizebutton}
       colorbutton={colorbutton}
+      {...rest}
     >
       {children}
     </Button>

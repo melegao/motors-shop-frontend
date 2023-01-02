@@ -1,127 +1,165 @@
-import Header from "../../components/header"
-import Carro1 from '../../assets/images/carro1.png'
-import { ProductContainer } from "./styles"
-import { Button } from "../../components/Button/style"
-import { useVehicleContext } from "../../context/ProductContext"
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import Footer from "../../components/Footer"
-import api from "../../services/api"
+import Header from "../../components/header";
+import Carro1 from "../../assets/images/carro1.png";
+import { ProductContainer } from "./styles";
+import { Button } from "../../components/Button/style";
+import { useVehicleContext } from "../../context/ProductContext";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Footer from "../../components/Footer";
+import api from "../../services/api";
+import CreateComment from "../../components/CreateComment";
 
+function ProductDetails() {
+  interface IVehicle {
+    id: string;
+    name: string;
+    description: string;
+    km: string;
+    year: number;
+    coverImage: string;
+    price: string;
+    createdAt: string;
+    updatedAt: string;
+    carImages?: { id: string; url: string }[];
+    motorcycleImages?: { id: string; url: string }[];
+  }
 
-function ProductDetails () {
+  const { id } = useParams();
 
-    interface IVehicle {
-        id: string;
-        name: string;
-        description: string;
-        km: string;
-        year: number
-        coverImage: string
-        price: string
-        createdAt: string
-        updatedAt: string
-        carImages?: {id: string, url: string}[]
-        motorcycleImages?: {id: string, url: string}[]
-    }
+  const type = id?.slice(37);
+  const newId = id?.slice(0, 36);
 
+  const [vehicle, setVehicle] = useState<IVehicle>();
 
-    const { id } = useParams()
+  useEffect(() => {
+    api
+      .get(`${type}/${newId}`)
+      .then((res) => setVehicle(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
-    const type = id?.slice(37)
-    const newId = id?.slice(0, 36)
+  return (
+    <>
+      <Header />
 
-    const [vehicle, setVehicle] = useState<IVehicle>()
+      <ProductContainer>
+        <div className="background-blue"></div>
+        <div className="div-container-desktop">
+          <div className="div-cover-photo">
+            <img
+              src={vehicle?.coverImage}
+              alt="Carro"
+              className="cover-photo"
+            />
+          </div>
+          <div className="div-resume">
+            <h2>{vehicle?.name}</h2>
+            <div className="div-resume-desktop">
+              <div className="div-resume-feat">
+                <span>{vehicle?.year}</span>
+                <span>{vehicle?.km}</span>
+              </div>
+              <p className="p-price">R$ {vehicle?.price.replace(".", ",")}</p>
+            </div>
+            <Button colorbutton="Brand">Comprar</Button>
+          </div>
+          <div className="div-description">
+            <h2>Descrição</h2>
+            <p>{vehicle?.description}</p>
+          </div>
 
-    useEffect(() => {
-        api
-          .get(`${type}/${newId}`)
-          .then((res) => setVehicle(res.data))
-          .catch((err) => console.log(err));
-      }, []);
+          <CreateComment />
 
-    return (
-        <>            
-            <Header />
+          <div className="div-photos">
+            <h2>Fotos</h2>
+            <div className="div-vehicles-photos">
+              {type === "cars" ? (
+                <>
+                  {vehicle?.carImages?.map((elem) => (
+                    <img
+                      key={elem.id}
+                      src={elem.url}
+                      alt={vehicle.name}
+                      width="100rem"
+                    />
+                  ))}
+                </>
+              ) : (
+                <>
+                  {vehicle?.motorcycleImages?.map((elem) => (
+                    <img
+                      key={elem.id}
+                      src={elem.url}
+                      alt={vehicle.name}
+                      width="100rem"
+                    />
+                  ))}
+                </>
+              )}
+            </div>
+          </div>
+          <div className="div-seller">
+            <div className="seller-photo">
+              <p>SL</p>
+            </div>
+            <h2>Samuel Leão</h2>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet
+              ab officia, optio cupiditate perspiciatis beatae necessitatibus.
+            </p>
+            <Button colorbutton="Grey" sizebutton="default">
+              Ver todos anúncios
+            </Button>
+          </div>
+        </div>
 
-            <ProductContainer>
-
-                <div className="background-blue"></div>
-                <div className="div-container-desktop">
-                    <div className="div-cover-photo">
-                        <img src={vehicle?.coverImage} alt='Carro' className="cover-photo"/>
-                    </div>
-                    <div className="div-resume">
-                            <h2>{vehicle?.name}</h2>
-                            <div className="div-resume-desktop">
-                            <div className="div-resume-feat">
-                                <span>{vehicle?.year}</span>
-                                <span>{vehicle?.km}</span>
-                            </div>
-                            <p className="p-price">R$ {vehicle?.price.replace(".", ",")}</p>
-                            </div>
-                            <Button colorbutton="Brand">Comprar</Button>
-                    </div>
-                    <div className="div-description">
-                        <h2>Descrição</h2>
-                        <p>{vehicle?.description}</p>
-                    </div>
-                    <div className="div-photos">
-                        <h2>Fotos</h2>
-                        <div className="div-vehicles-photos">
-                            {type === 'cars'?
-                                <>
-                                {vehicle?.carImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width='100rem'/>)}
-                                </>
-                            :
-                                <>
-                                {vehicle?.motorcycleImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width='100rem'/>)}
-                                </>
-                            }
-                        </div>
-                    </div>
-                    <div className="div-seller">
-                        <div className="seller-photo">
-                            <p>SL</p>
-                        </div>
-                        <h2>Samuel Leão</h2>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet ab officia, optio cupiditate perspiciatis 
-                            beatae necessitatibus.</p>
-                        <Button colorbutton="Grey" sizebutton="default">Ver todos anúncios</Button>
-                    </div>
-                </div>
-
-                <div className="div-aside-desktop">
-                    <div className="div-photos-desktop">
-                        <h2>Fotos</h2>
-                        <div className="div-vehicles-photos">
-                            {type === 'cars'?
-                                <>
-                                {vehicle?.carImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width='100rem'/>)}
-                                </>
-                            :
-                                <>
-                                {vehicle?.motorcycleImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width='100rem'/>)}
-                                </>
-                            }
-                        </div>
-                    </div>
-                    <div className="div-seller-desktop">
-                        <div className="seller-photo">
-                            <p>SL</p>
-                        </div>
-                        <h2>Samuel Leão</h2>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet ab officia, optio cupiditate perspiciatis 
-                            beatae necessitatibus.</p>
-                        <Button colorbutton="Grey" sizebutton="default">Ver todos anúncios</Button>
-                    </div>
-                </div>
-
-            </ProductContainer>
-
-            <Footer />
-        </>
-    )
+        <div className="div-aside-desktop">
+          <div className="div-photos-desktop">
+            <h2>Fotos</h2>
+            <div className="div-vehicles-photos">
+              {type === "cars" ? (
+                <>
+                  {vehicle?.carImages?.map((elem) => (
+                    <img
+                      key={elem.id}
+                      src={elem.url}
+                      alt={vehicle.name}
+                      width="100rem"
+                    />
+                  ))}
+                </>
+              ) : (
+                <>
+                  {vehicle?.motorcycleImages?.map((elem) => (
+                    <img
+                      key={elem.id}
+                      src={elem.url}
+                      alt={vehicle.name}
+                      width="100rem"
+                    />
+                  ))}
+                </>
+              )}
+            </div>
+          </div>
+          <div className="div-seller-desktop">
+            <div className="seller-photo">
+              <p>SL</p>
+            </div>
+            <h2>Samuel Leão</h2>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet
+              ab officia, optio cupiditate perspiciatis beatae necessitatibus.
+            </p>
+            <Button colorbutton="Grey" sizebutton="default">
+              Ver todos anúncios
+            </Button>
+          </div>
+        </div>
+      </ProductContainer>
+      <Footer />
+    </>
+  );
 }
 
-export default ProductDetails
+export default ProductDetails;
