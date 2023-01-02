@@ -3,11 +3,13 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.5);
+  /* backdrop-filter: blur(5px); */
   z-index: 1001;
   position: fixed;
   inset: 0;
+
+  overflow-y: scroll;
 
   .modal {
     max-width: 450px;
@@ -21,8 +23,6 @@ export const Container = styled.div`
     margin: 1rem auto;
     animation: fadeInModalChat 1s ease-in-out backwards;
 
-    padding: 1rem;
-
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -33,10 +33,16 @@ export const Container = styled.div`
       font-size: 14px;
     }
 
+    .vehicleInfo {
+      padding: 1rem;
+    }
+
     .saleType {
       display: flex;
       flex-direction: column;
       gap: 1rem;
+
+      padding: 1rem;
 
       .saleButtons {
         display: flex;
@@ -106,6 +112,8 @@ export const Container = styled.div`
 
     margin-top: 0.2rem;
     margin-bottom: 1rem;
+
+    padding: 1rem;
 
     h2 {
       font-weight: 500;

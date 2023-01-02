@@ -32,7 +32,7 @@ function CreateProductModal({ setShowCreateVehicleModal }: any) {
           </div>
         </div>
 
-        <p>Informações do veículo</p>
+        <p className="vehicleInfo">Informações do veículo</p>
         <SaleForm setShowCreateVehicleModal={setShowCreateVehicleModal} />
       </div>
     </Container>
