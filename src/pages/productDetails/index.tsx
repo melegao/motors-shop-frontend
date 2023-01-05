@@ -1,10 +1,14 @@
 import Header from "../../components/header";
+import Carro1 from "../../assets/images/carro1.png";
 import { ProductContainer } from "./styles";
 import { Button } from "../../components/Button/style";
+import { useVehicleContext } from "../../context/ProductContext";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
 import api from "../../services/api";
+import CreateComment from "../../components/CreateComment";
+
 
 function ProductDetails() {
   interface IVehicle {
@@ -21,7 +25,6 @@ function ProductDetails() {
   }
 
   const { id } = useParams();
-
 
   const [vehicle, setVehicle] = useState<IVehicle>();
 
@@ -64,6 +67,7 @@ function ProductDetails() {
             <h2>Descrição</h2>
             <p>{vehicle?.description}</p>
           </div>
+          <CreateComment />
           <div className="div-photos">
             <h2>Fotos</h2>
             <div className="div-vehicles-photos">
@@ -107,7 +111,6 @@ function ProductDetails() {
           </div>
         </div>
       </ProductContainer>
-
       <Footer />
     </>
   );
