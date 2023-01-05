@@ -14,6 +14,8 @@ interface IVehicle {
     price: string
     createdAt: string
     updatedAt: string
+    type: string
+    vehicleImages: {id: string, url: string}[]
 }
 
 interface ICar extends IVehicle{
@@ -25,8 +27,8 @@ interface IMotorcycle extends IVehicle{
 }
 
 type vehicleContextType = {
-    allCars: ICar[]
-    setAllCars: React.Dispatch<React.SetStateAction<ICar[]>>
+    allCars: IVehicle[]
+    setAllCars: React.Dispatch<React.SetStateAction<IVehicle[]>>
     allMotorcycles: IMotorcycle[]
     setAllMotorcycles: React.Dispatch<React.SetStateAction<IMotorcycle[]>>
 }
@@ -35,7 +37,7 @@ const VehicleContext = createContext<vehicleContextType>({} as vehicleContextTyp
 
 export function VehicleProvider({children}: ProviderProps){
 
-    const [allCars, setAllCars] = useState<ICar[]>([])
+    const [allCars, setAllCars] = useState<IVehicle[]>([])
     const [allMotorcycles, setAllMotorcycles] = useState<IMotorcycle[]>([])
 
     return(
