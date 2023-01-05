@@ -3,14 +3,17 @@ import { ContainerHeader } from "./styles";
 import logo from "../../assets/logo/logo-motors-shop.svg";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/style";
+import { useVehicleContext } from "../../context/ProductContext";
 
 function Header() {
+
   const navigate = useNavigate();
 
-  const [logged, setLogged] = useState(false); // ESSE STATE DEVERÁ SER SUBSTITUÍDO POR UM PROVIDER.
+  const { logged, user } = useVehicleContext()
 
   const [headerMenuName, setHeaderMenuName] = useState(true);
   const [className, setClassName] = useState("header-menu");
+ 
 
   const handleHeaderMenu = () => {
     setHeaderMenuName(!headerMenuName);
@@ -40,7 +43,7 @@ function Header() {
         </ul>
 
         {logged ? (
-          <div className="login-area">Olá Fulano</div>
+          <div className="login-area">{user?.fullName}</div>
         ) : (
           <div className="login-area">
             <p onClick={() => navigate("/login")}>Fazer Login</p>

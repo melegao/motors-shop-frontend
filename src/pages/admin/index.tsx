@@ -3,10 +3,13 @@ import CarouselProducts from "../../components/CarouselProducts";
 import CreateProductModal from "../../components/CreateProductModal";
 import Footer from "../../components/Footer";
 import Header from "../../components/header";
+import { useVehicleContext } from "../../context/ProductContext";
 import { BlueDiv, Container, Content, UserDiv } from "./styles";
 
 function Admin() {
   const [showCreateVehicleModal, setShowCreateVehicleModal] = useState(false);
+
+  const { logged, user } = useVehicleContext();
 
   return (
     <>
@@ -23,13 +26,9 @@ function Admin() {
             <div className="userInfo">
               <div className="photo">SL</div>
               <h2 className="nameTitle">
-                Samuel Leão <span>Anunciante</span>
+                {user?.fullName} <span>Anunciante</span>
               </h2>
-              <p className="description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Dignissimos aliquid, ut molestias quaerat nisi recusandae at
-                sint corporis.
-              </p>
+              <p className="description">{user?.description}</p>
               <button
                 className="addVehicle"
                 onClick={() => setShowCreateVehicleModal(true)}
@@ -46,12 +45,12 @@ function Admin() {
 
           <div className="cars">
             <h3>Carros</h3>
-            <CarouselProducts props="cars" />
+            <CarouselProducts props="car" />
           </div>
 
           <div className="motorcycles">
             <h3>Motos</h3>
-            <CarouselProducts props="motorcycles" />
+            <CarouselProducts props="motorcycle" />
           </div>
         </Content>
       </Container>
