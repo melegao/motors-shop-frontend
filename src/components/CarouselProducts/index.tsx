@@ -7,23 +7,23 @@ import api from "../../services/api";
 
 function CarouselProducts({ props }: any) {
 
-  const { allCars, setAllCars } = useVehicleContext()
+  const { allVehicles, setAllVehicles } = useVehicleContext()
 
   useEffect(() => {
     api
       .get(`/vehicles`)
-      .then((res) => setAllCars(res.data))
+      .then((res) => setAllVehicles(res.data))
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <CarouselProductsContainer>
       {props === 'car'? 
-        allCars?.map((product, index) => product.type === props && (
+        allVehicles?.map((product, index) => product.type === props && (
           <CardProdut key={product.id} product={product} type='motorcycles'/>
         ))
       :
-      allCars?.map((product, index) => product.type === props && (
+      allVehicles?.map((product, index) => product.type === props && (
           <CardProdut key={product.id} product={product} type='motorcycles'/>
         ))
       }

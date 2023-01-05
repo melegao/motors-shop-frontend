@@ -1,52 +1,89 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 interface ProviderProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
 interface IVehicle {
+  id: string;
+  name: string;
+  description: string;
+  km: string;
+  year: number;
+  coverImage: string;
+  price: string;
+  createdAt: string;
+  updatedAt: string;
+  type: string;
+  vehicleImages: { id: string; url: string }[];
+}
+
+interface IUser {
+  address?: {
+    city: string;
+    complement?: string;
     id: string;
-    name: string;
+    number: string;
+    state: string;
+    street: string;
+    zipCode: string;
+  };
+  birthDate: string;
+  cellPhone: string;
+  cpf: string;
+  description: string;
+  email: string;
+  fullName: string;
+  id: string;
+  isSeller: boolean;
+  vehicle?: {
+    coverImage: string;
+    createdAt: string;
     description: string;
+    id: string;
     km: string;
-    year: number
-    coverImage: string
-    price: string
-    createdAt: string
-    updatedAt: string
-    type: string
-    vehicleImages: {id: string, url: string}[]
-}
-
-interface ICar extends IVehicle{
-    carImages: {id: string, url: string}[]
-}
-
-interface IMotorcycle extends IVehicle{
-    motorcycleImages: {id: string, url: string}[]
+    name: string;
+    price: string;
+    type: string;
+    updatedAt: string;
+    vehicleImages: { id: string; url: string }[];
+  }[];
 }
 
 type vehicleContextType = {
-    allCars: IVehicle[]
-    setAllCars: React.Dispatch<React.SetStateAction<IVehicle[]>>
-    allMotorcycles: IMotorcycle[]
-    setAllMotorcycles: React.Dispatch<React.SetStateAction<IMotorcycle[]>>
+  allVehicles: IVehicle[];
+  setAllVehicles: React.Dispatch<React.SetStateAction<IVehicle[]>>;
+  logged: boolean;
+  setLogged: React.Dispatch<React.SetStateAction<boolean>>;
+  user: IUser | undefined;
+  setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>;
+};
+
+const VehicleContext = createContext<vehicleContextType>(
+  {} as vehicleContextType
+);
+
+export function VehicleProvider({ children }: ProviderProps) {
+  const [allVehicles, setAllVehicles] = useState<IVehicle[]>([]);
+  const [logged, setLogged] = useState<boolean>(false);
+  const [user, setUser] = useState<IUser>();
+
+  return (
+    <VehicleContext.Provider
+      value={{
+        allVehicles,
+        setAllVehicles,
+        logged,
+        setLogged,
+        user,
+        setUser,
+      }}
+    >
+      {children}
+    </VehicleContext.Provider>
+  );
 }
 
-const VehicleContext = createContext<vehicleContextType>({} as vehicleContextType)
-
-export function VehicleProvider({children}: ProviderProps){
-
-    const [allCars, setAllCars] = useState<IVehicle[]>([])
-    const [allMotorcycles, setAllMotorcycles] = useState<IMotorcycle[]>([])
-
-    return(
-        <VehicleContext.Provider value={{allCars, setAllCars, allMotorcycles, setAllMotorcycles}}>
-            {children}
-        </VehicleContext.Provider>
-    )
-}
-
-export function useVehicleContext(){
-    return useContext(VehicleContext)
+export function useVehicleContext() {
+  return useContext(VehicleContext);
 }

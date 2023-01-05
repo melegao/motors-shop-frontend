@@ -5,12 +5,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import api from "../../../services/api";
+import { toast } from "react-toastify";
+import { useVehicleContext } from "../../../context/ProductContext";
 
 export const FormLogin = () => {
+  const { setLogged, setUser } = useVehicleContext();
+
   const navigate = useNavigate();
 
   const schema = yup.object().shape({
-    user: yup.string().required("Required field"),
+    email: yup.string().required("Required field"),
     password: yup.string().required("Password required"),
   });
 
@@ -21,8 +26,42 @@ export const FormLogin = () => {
   } = useForm({ resolver: yupResolver(schema), reValidateMode: "onSubmit" });
 
   const onSubmit = (data: object) => {
-    console.log(data);
+    api
+      .post("login", data)
+      .then((res) => handleSuccess(res.data))
+      .catch((err) => handleFailed());
   };
+
+  interface DataLogin {
+    isSeller: boolean;
+    token: string;
+    userId: string;
+  }
+
+  const handleSuccess = (data: DataLogin) => {
+    toast.success("Login efetuado com sucesso");
+    localStorage.setItem("@motorsShop:token", JSON.stringify(data.token));
+    localStorage.setItem("@motorsShop:userId", JSON.stringify(data.userId));
+    localStorage.setItem("@motorsShop:isSeller", JSON.stringify(data.isSeller));
+
+    api
+      .get(`users/${data.userId}`)
+      .then((res) => setUser(res.data))
+      .catch((err) => console.log(err))
+
+      
+
+    setTimeout(() => {
+      setLogged(true);
+
+      data.isSeller ? navigate("/admin") : navigate("/");
+    }, 3000);
+  };
+
+  const handleFailed = () => {
+    toast.error("E-mail ou senha inválido");
+  };
+
   return (
     <>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -36,8 +75,8 @@ export const FormLogin = () => {
           label="Usuário"
           placeholder="Digitar usuário"
           register={register}
-          name="user"
-          error={errors?.user?.message}
+          name="email"
+          error={errors?.email?.message}
         ></InputBase>
         <InputBase
           width="50%"
