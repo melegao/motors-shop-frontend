@@ -9,7 +9,7 @@ function CardProdut ({product, type}: any) {
 
     const openProduct = (id: string) => {
         window.scrollTo(0, 0)
-        navigate(`/product/${id}-${type}`)
+        navigate(`/product/${id}`)
         console.log(id)
         console.log(type)
     }
@@ -33,7 +33,10 @@ function CardProdut ({product, type}: any) {
                     <span>{product.km} KM</span>
                     <span>{product.year}</span>
                 </div>
-                <p>R$ {product.price}</p>
+                <p>{Number(product.price).toLocaleString("pt-BR", {
+                    style: 'currency',
+                    currency: 'BRL'
+                })}</p>
             </div>
         </CardProductContainer>
     )

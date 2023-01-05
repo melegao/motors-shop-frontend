@@ -25,11 +25,11 @@ function Home() {
 
         <div className="div-carros">
           <h3>Carros</h3>
-          <CarouselProducts props="cars" />
+          <CarouselProducts props="car" />
         </div>
         <div className="div-motos">
           <h3>Motos</h3>
-          <CarouselProducts props="motorcycles" />
+          <CarouselProducts props="motorcycle" />
         </div>
       </HomeContainer>
       <Footer />

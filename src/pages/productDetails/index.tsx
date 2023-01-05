@@ -9,6 +9,7 @@ import Footer from "../../components/Footer";
 import api from "../../services/api";
 import CreateComment from "../../components/CreateComment";
 
+
 function ProductDetails() {
   interface IVehicle {
     id: string;
@@ -20,20 +21,16 @@ function ProductDetails() {
     price: string;
     createdAt: string;
     updatedAt: string;
-    carImages?: { id: string; url: string }[];
-    motorcycleImages?: { id: string; url: string }[];
+    vehicleImages?: { id: string; url: string }[];
   }
 
   const { id } = useParams();
-
-  const type = id?.slice(37);
-  const newId = id?.slice(0, 36);
 
   const [vehicle, setVehicle] = useState<IVehicle>();
 
   useEffect(() => {
     api
-      .get(`${type}/${newId}`)
+      .get(`vehicles/${id}`)
       .then((res) => setVehicle(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -59,7 +56,10 @@ function ProductDetails() {
                 <span>{vehicle?.year}</span>
                 <span>{vehicle?.km}</span>
               </div>
-              <p className="p-price">R$ {vehicle?.price.replace(".", ",")}</p>
+              <p className="p-price">{Number(vehicle?.price).toLocaleString("pt-BR", {
+                    style: 'currency',
+                    currency: 'BRL'
+                })}</p>
             </div>
             <Button colorbutton="Brand">Comprar</Button>
           </div>
@@ -67,35 +67,11 @@ function ProductDetails() {
             <h2>Descrição</h2>
             <p>{vehicle?.description}</p>
           </div>
-
           <CreateComment />
-
           <div className="div-photos">
             <h2>Fotos</h2>
             <div className="div-vehicles-photos">
-              {type === "cars" ? (
-                <>
-                  {vehicle?.carImages?.map((elem) => (
-                    <img
-                      key={elem.id}
-                      src={elem.url}
-                      alt={vehicle.name}
-                      width="100rem"
-                    />
-                  ))}
-                </>
-              ) : (
-                <>
-                  {vehicle?.motorcycleImages?.map((elem) => (
-                    <img
-                      key={elem.id}
-                      src={elem.url}
-                      alt={vehicle.name}
-                      width="100rem"
-                    />
-                  ))}
-                </>
-              )}
+                {vehicle?.vehicleImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width="100rem"/>)}
             </div>
           </div>
           <div className="div-seller">
@@ -117,29 +93,7 @@ function ProductDetails() {
           <div className="div-photos-desktop">
             <h2>Fotos</h2>
             <div className="div-vehicles-photos">
-              {type === "cars" ? (
-                <>
-                  {vehicle?.carImages?.map((elem) => (
-                    <img
-                      key={elem.id}
-                      src={elem.url}
-                      alt={vehicle.name}
-                      width="100rem"
-                    />
-                  ))}
-                </>
-              ) : (
-                <>
-                  {vehicle?.motorcycleImages?.map((elem) => (
-                    <img
-                      key={elem.id}
-                      src={elem.url}
-                      alt={vehicle.name}
-                      width="100rem"
-                    />
-                  ))}
-                </>
-              )}
+                {vehicle?.vehicleImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width="100rem"/>)}
             </div>
           </div>
           <div className="div-seller-desktop">
