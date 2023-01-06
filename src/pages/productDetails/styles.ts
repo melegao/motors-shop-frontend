@@ -283,6 +283,7 @@ export const ProductContainer = styled.div`
             flex-direction: column;
             gap: 24px;
             min-width: 20rem;
+            max-width: 27rem;
         }
 
         .div-photos {
