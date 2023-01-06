@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { InputStyled, StyledDiv } from "./style";
-import { FieldError } from "react-hook-form";
 
 interface InputProps {
   label?: string;
