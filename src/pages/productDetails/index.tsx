@@ -1,14 +1,11 @@
 import Header from "../../components/header";
-import Carro1 from "../../assets/images/carro1.png";
 import { ProductContainer } from "./styles";
 import { Button } from "../../components/Button/style";
-import { useVehicleContext } from "../../context/ProductContext";
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
 import api from "../../services/api";
 import CreateComment from "../../components/CreateComment";
-
 
 function ProductDetails() {
   interface IVehicle {
@@ -22,12 +19,17 @@ function ProductDetails() {
     createdAt: string;
     updatedAt: string;
     vehicleImages?: { id: string; url: string }[];
-    user: {id: string; fullName: string; description: string}
+    user: {
+      id: string;
+      fullName: string;
+      description: string;
+      cellPhone: string;
+    };
   }
 
   const { id } = useParams();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [vehicle, setVehicle] = useState<IVehicle>();
 
@@ -35,14 +37,20 @@ function ProductDetails() {
     api
       .get(`vehicles/${id}`)
       .then((res) => {
-        setVehicle(res.data)
+        setVehicle(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
   const handleClickSeller = () => {
-    navigate(`/profile/${vehicle?.user.id}`)
-}
+    navigate(`/profile/${vehicle?.user.id}`);
+  };
+
+  const handleBuy = () => {
+    const number = vehicle?.user.cellPhone.replace(" ", "").replace("-", "");
+    const url = `https://api.whatsapp.com/send/?phone=55${number}&text=Ol%C3%A1%2C+vi+o+seu+an%C3%BAncio+no+Motors+shop.+Gostaria+de+fazer+uma+oferta%21&type=phone_number&app_absent=0`;
+    window.open(url, "_blanc");
+  };
 
   return (
     <>
@@ -65,12 +73,16 @@ function ProductDetails() {
                 <span>{vehicle?.year}</span>
                 <span>{vehicle?.km}</span>
               </div>
-              <p className="p-price">{Number(vehicle?.price).toLocaleString("pt-BR", {
-                    style: 'currency',
-                    currency: 'BRL'
-                })}</p>
+              <p className="p-price">
+                {Number(vehicle?.price).toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </p>
             </div>
-            <Button colorbutton="Brand">Comprar</Button>
+            <Button colorbutton="Brand" onClick={() => handleBuy()}>
+              Comprar
+            </Button>
           </div>
           <div className="div-description">
             <h2>Descrição</h2>
@@ -80,7 +92,14 @@ function ProductDetails() {
           <div className="div-photos">
             <h2>Fotos</h2>
             <div className="div-vehicles-photos">
-                {vehicle?.vehicleImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width="100rem"/>)}
+              {vehicle?.vehicleImages?.map((elem) => (
+                <img
+                  key={elem.id}
+                  src={elem.url}
+                  alt={vehicle.name}
+                  width="100rem"
+                />
+              ))}
             </div>
           </div>
           <div className="div-seller">
@@ -89,7 +108,11 @@ function ProductDetails() {
             </div>
             <h2>{vehicle?.user.fullName}</h2>
             <p>{vehicle?.user.description}</p>
-            <Button colorbutton="Grey" sizebutton="default" onClick={() => handleClickSeller()}>
+            <Button
+              colorbutton="Grey"
+              sizebutton="default"
+              onClick={() => handleClickSeller()}
+            >
               Ver todos anúncios
             </Button>
           </div>
@@ -99,7 +122,14 @@ function ProductDetails() {
           <div className="div-photos-desktop">
             <h2>Fotos</h2>
             <div className="div-vehicles-photos">
-                {vehicle?.vehicleImages?.map((elem) => <img key={elem.id} src={elem.url} alt={vehicle.name} width="100rem"/>)}
+              {vehicle?.vehicleImages?.map((elem) => (
+                <img
+                  key={elem.id}
+                  src={elem.url}
+                  alt={vehicle.name}
+                  width="100rem"
+                />
+              ))}
             </div>
           </div>
           <div className="div-seller-desktop">
@@ -108,7 +138,11 @@ function ProductDetails() {
             </div>
             <h2>{vehicle?.user.fullName}</h2>
             <p>{vehicle?.user.description}</p>
-            <Button colorbutton="Grey" sizebutton="default" onClick={() => handleClickSeller()}>
+            <Button
+              colorbutton="Grey"
+              sizebutton="default"
+              onClick={() => handleClickSeller()}
+            >
               Ver todos anúncios
             </Button>
           </div>
