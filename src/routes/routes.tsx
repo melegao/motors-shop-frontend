@@ -5,20 +5,20 @@ import { LoginPage } from "../pages/login";
 import Admin from "../pages/admin";
 import ProfileViewUser from "../pages/profileViewUser";
 import { SignInPage } from "../pages/signIn";
-import { useVehicleContext } from "../context/ProductContext";
 import { useEffect } from "react";
 
 function Ways() {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const { logged } = useVehicleContext();
-
-  useEffect(() => {
-    if (!logged){
-      navigate('/')
-    }
-  }, [])
+  // useEffect(() => {
+  //   const userdId = localStorage.getItem("@motorsShop:userId")
+  //   const isSeller = localStorage.getItem("@motorsShop:isSeller")
+  //   console.log(isSeller)
+  //   if (isSeller === "false"){
+  //     navigate('/')
+  //   }
+  // }, [])
 
   
 
@@ -31,7 +31,7 @@ function Ways() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign" element={<SignInPage />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/profile" element={<ProfileViewUser />} />
+        <Route path="/profile/:id" element={<ProfileViewUser />} />
       </Routes>
     </>
   );

@@ -4,7 +4,7 @@ import { ProductContainer } from "./styles";
 import { Button } from "../../components/Button/style";
 import { useVehicleContext } from "../../context/ProductContext";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
 import api from "../../services/api";
 import CreateComment from "../../components/CreateComment";
@@ -22,18 +22,27 @@ function ProductDetails() {
     createdAt: string;
     updatedAt: string;
     vehicleImages?: { id: string; url: string }[];
+    user: {id: string; fullName: string; description: string}
   }
 
   const { id } = useParams();
+
+  const navigate = useNavigate()
 
   const [vehicle, setVehicle] = useState<IVehicle>();
 
   useEffect(() => {
     api
       .get(`vehicles/${id}`)
-      .then((res) => setVehicle(res.data))
+      .then((res) => {
+        setVehicle(res.data)
+      })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleClickSeller = () => {
+    navigate(`/profile/${vehicle?.user.id}`)
+}
 
   return (
     <>
@@ -78,12 +87,9 @@ function ProductDetails() {
             <div className="seller-photo">
               <p>SL</p>
             </div>
-            <h2>Samuel Leão</h2>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet
-              ab officia, optio cupiditate perspiciatis beatae necessitatibus.
-            </p>
-            <Button colorbutton="Grey" sizebutton="default">
+            <h2>{vehicle?.user.fullName}</h2>
+            <p>{vehicle?.user.description}</p>
+            <Button colorbutton="Grey" sizebutton="default" onClick={() => handleClickSeller()}>
               Ver todos anúncios
             </Button>
           </div>
@@ -100,12 +106,9 @@ function ProductDetails() {
             <div className="seller-photo">
               <p>SL</p>
             </div>
-            <h2>Samuel Leão</h2>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet
-              ab officia, optio cupiditate perspiciatis beatae necessitatibus.
-            </p>
-            <Button colorbutton="Grey" sizebutton="default">
+            <h2>{vehicle?.user.fullName}</h2>
+            <p>{vehicle?.user.description}</p>
+            <Button colorbutton="Grey" sizebutton="default" onClick={() => handleClickSeller()}>
               Ver todos anúncios
             </Button>
           </div>
