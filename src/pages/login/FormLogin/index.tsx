@@ -40,16 +40,14 @@ export const FormLogin = () => {
 
   const handleSuccess = (data: DataLogin) => {
     toast.success("Login efetuado com sucesso");
-    localStorage.setItem("@motorsShop:token", JSON.stringify(data.token));
-    localStorage.setItem("@motorsShop:userId", JSON.stringify(data.userId));
+    localStorage.setItem("@motorsShop:token", data.token);
+    localStorage.setItem("@motorsShop:userId", data.userId);
     localStorage.setItem("@motorsShop:isSeller", JSON.stringify(data.isSeller));
 
     api
       .get(`users/${data.userId}`)
       .then((res) => setUser(res.data))
-      .catch((err) => console.log(err))
-
-      
+      .catch((err) => console.log(err));
 
     setTimeout(() => {
       setLogged(true);

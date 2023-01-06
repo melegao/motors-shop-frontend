@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import api from "../services/api";
 
 interface ProviderProps {
   children: ReactNode;
@@ -67,6 +74,19 @@ export function VehicleProvider({ children }: ProviderProps) {
   const [allVehicles, setAllVehicles] = useState<IVehicle[]>([]);
   const [logged, setLogged] = useState<boolean>(false);
   const [user, setUser] = useState<IUser>();
+
+  useEffect(() => {
+    
+    const userId = localStorage.getItem("@motorsShop:userId")
+
+    if (userId) {
+      setLogged(true);
+      api
+        .get(`users/${userId}`)
+        .then((res) => setUser(res.data))
+        .catch((err) => console.log(err));
+    }
+  }, []);
 
   return (
     <VehicleContext.Provider

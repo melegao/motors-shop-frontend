@@ -1,12 +1,28 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "../pages/home";
 import ProductDetails from "../pages/productDetails";
 import { LoginPage } from "../pages/login";
 import Admin from "../pages/admin";
 import ProfileViewUser from "../pages/profileViewUser";
 import { SignInPage } from "../pages/signIn";
+import { useVehicleContext } from "../context/ProductContext";
+import { useEffect } from "react";
 
 function Ways() {
+
+  const navigate = useNavigate();
+
+  const { logged } = useVehicleContext();
+
+  useEffect(() => {
+    if (!logged){
+      navigate('/')
+    }
+  }, [])
+
+  
+
+
   return (
     <>
       <Routes>

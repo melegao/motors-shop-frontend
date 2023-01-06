@@ -9,7 +9,7 @@ import { BlueDiv, Container, Content, UserDiv } from "./styles";
 function Admin() {
   const [showCreateVehicleModal, setShowCreateVehicleModal] = useState(false);
 
-  const { logged, user } = useVehicleContext();
+  const { user } = useVehicleContext();
 
   return (
     <>
