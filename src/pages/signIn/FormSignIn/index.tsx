@@ -6,67 +6,60 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { IModalSuccess } from "../../../interfaces/successModal.interfaces";
+import { IUserRequest } from "../../../interfaces/user.interface";
+import api from "../../../services/api";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const FormSignIn: React.FC<IModalSuccess> = ({
   setShowSuccessModal,
 }) => {
+  const navigate = useNavigate();
   const [isBuyer, setIsBuyer] = useState(false);
-  const [isSeller, setIsSeller] = useState(false);
+  const [isSellerColor, setIsSellerColor] = useState(false);
 
   const schema = yup.object().shape({
-    name: yup
+    fullName: yup
       .string()
-      .required("Required field")
-      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
-    email: yup.string().email().required("Required field"),
+      .required("Campo obrigatório")
+      .matches(/^[aA-zZ\s]+$/, "Apenas letras são permitidas"),
+    email: yup.string().email().required("Campo obrigatório"),
     cpf: yup
       .string()
-      .required("Required field")
+      .required("Campo obrigatório")
       .matches(
         /([0-9]{2}[.]?[0-9]{3}[.]?[0-9]{3}[/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[.]?[0-9]{3}[.]?[0-9]{3}[-]?[0-9]{2})/,
         "invalid CPF"
       ),
-    phone: yup
+    cellPhone: yup
       .string()
-      .required("Required field")
+      .required("Campo obrigatório")
       .matches(
         /^\s*(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})[-. ]?\s*$/,
         "invalid phone number"
       ),
-    birthday: yup
-      .date()
-      .required("Required field")
-      .typeError("Please enter a valid date")
-      .max(
-        `${new Date().getUTCFullYear() - 18}-${
-          new Date().getUTCMonth() + 1
-        }-${new Date().getDate()}`,
-        "You are not 18 years old"
-      ),
-    cep: yup
+    birthDate: yup
       .string()
-      .required("Required field")
+      .required("Campo obrigatório")
+      .typeError("Digite uma data válida"),
+    zipCode: yup
+      .string()
+      .required("Campo obrigatório")
       .matches(/^[0-9]{5}[-]?[0-9]{3}$/, "CEP inválido"),
     state: yup
       .string()
-      .required("Required field")
-      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
-    city: yup
-      .string()
-      .required("Required field")
-      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
-    street: yup.string().required("Required field"),
-    number: yup
-      .number()
-      .required("Required field")
-      .typeError("Please enter a valid number"),
-    password: yup.string().required("Required field").min(8),
+      .required("Campo obrigatório")
+      .matches(/^[aA-zZ\s]+$/, "Apenas letras são permitidas")
+      .max(2, "Digite apenas a sigla"),
+    city: yup.string().required("Campo obrigatório"),
+    street: yup.string().required("Campo obrigatório"),
+    number: yup.string().required("Campo obrigatório"),
+    password: yup.string().required("Campo obrigatório").min(4),
     passwordConfirm: yup
       .string()
-      .oneOf([yup.ref("password")])
-      .required("Required field"),
-    buyer: yup.boolean().required("Required field"),
-    seller: yup.boolean().required("Required field"),
+      .required("Campo obrigatório")
+      .oneOf([yup.ref("password")], "Senhas diferentes"),
+    isSeller: yup.boolean().required("Campo obrigatório"),
   });
 
   const {
@@ -74,11 +67,55 @@ export const FormSignIn: React.FC<IModalSuccess> = ({
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema), reValidateMode: "onSubmit" });
+  } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: object) => {
-    console.log(data);
-    setShowSuccessModal(true);
+  const onSubmit = (data: any) => {
+    const {
+      birthDate,
+      cellPhone,
+      city,
+      cpf,
+      email,
+      fullName,
+      isSeller,
+      number,
+      password,
+      state,
+      street,
+      zipCode,
+      complement,
+      description,
+    } = data;
+
+    const newUserObj: IUserRequest = {
+      fullName,
+      email,
+      cpf,
+      cellPhone,
+      birthDate,
+      description,
+      isSeller,
+      password,
+      address: { street, number, complement, zipCode, city, state },
+    };
+
+    api
+      .post("users", newUserObj)
+      .then((res) => {
+        setShowSuccessModal(true);
+
+        setTimeout(() => navigate("/login"), 3000);
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.data.message === "This email already exist.") {
+          toast.error("Email já cadastrado.");
+        }
+
+        if (err.response.data.message === "This CPF already exist.") {
+          toast.error("CPF já cadastrado.");
+        }
+      });
   };
 
   return (
@@ -96,8 +133,8 @@ export const FormSignIn: React.FC<IModalSuccess> = ({
           label="Nome"
           placeholder="Ex: Samuel Leão"
           register={register}
-          name="name"
-          error={errors?.name?.message}
+          name="fullName"
+          error={errors?.fullName?.message}
         ></InputBase>
 
         <InputBase
@@ -126,8 +163,8 @@ export const FormSignIn: React.FC<IModalSuccess> = ({
           label="Celular"
           placeholder="(DDD) 90000-0000"
           register={register}
-          name="phone"
-          error={errors?.phone?.message}
+          name="cellPhone"
+          error={errors?.cellPhone?.message}
         ></InputBase>
 
         <InputBase
@@ -135,8 +172,8 @@ export const FormSignIn: React.FC<IModalSuccess> = ({
           type="date"
           label="Data de nascimento"
           register={register}
-          name="birthday"
-          error={errors?.birthday?.message}
+          name="birthDate"
+          error={errors?.birthDate?.message}
         ></InputBase>
 
         <div className="description">
@@ -157,15 +194,15 @@ export const FormSignIn: React.FC<IModalSuccess> = ({
           label="CEP"
           placeholder="00000.000"
           register={register}
-          name="cep"
-          error={errors?.cep?.message}
+          name="zipCode"
+          error={errors?.zipCode?.message}
         ></InputBase>
 
         <InputBase
           width="50%"
           type="text"
           label="Estado"
-          placeholder="Digitar Estado"
+          placeholder="Digitar sigla do Estado"
           register={register}
           name="state"
           error={errors?.state?.message}
@@ -207,7 +244,7 @@ export const FormSignIn: React.FC<IModalSuccess> = ({
           label="Complemento"
           register={register}
           placeholder="Ex: apart 307"
-          name="inAdd"
+          name="complement"
         ></InputBase>
 
         <div className="subTitle">
@@ -221,9 +258,8 @@ export const FormSignIn: React.FC<IModalSuccess> = ({
             colorbutton={isBuyer ? "Brand" : "-"}
             onClick={() => {
               setIsBuyer(true);
-              setIsSeller(false);
-              setValue("buyer", true);
-              setValue("seller", false);
+              setIsSellerColor(false);
+              setValue("isSeller", false);
             }}
           >
             Comprador
@@ -232,12 +268,11 @@ export const FormSignIn: React.FC<IModalSuccess> = ({
           <ButtonBase
             type="button"
             width="24%"
-            colorbutton={isSeller ? "Brand" : "-"}
+            colorbutton={isSellerColor ? "Brand" : "-"}
             onClick={() => {
-              setIsSeller(true);
+              setIsSellerColor(true);
               setIsBuyer(false);
-              setValue("seller", true);
-              setValue("buyer", false);
+              setValue("isSeller", true);
             }}
           >
             Anuciante
@@ -246,7 +281,7 @@ export const FormSignIn: React.FC<IModalSuccess> = ({
           {errors?.buyer !== undefined && (
             <div className="label--error">
               <label>
-                <p>Required field</p>
+                <p>Campo obrigatório</p>
               </label>
             </div>
           )}
