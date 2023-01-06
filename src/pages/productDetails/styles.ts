@@ -266,6 +266,7 @@ export const ProductContainer = styled.div`
             gap: 32px;
             padding: 36px 28px;
             border-radius: 4px;
+            width: 40rem;
 
             p {
                 font-family: 'Inter', sans-serif;
@@ -281,7 +282,7 @@ export const ProductContainer = styled.div`
             display: flex;
             flex-direction: column;
             gap: 24px;
-            width: 30rem;
+            min-width: 20rem;
         }
 
         .div-photos {
