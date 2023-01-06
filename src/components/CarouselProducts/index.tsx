@@ -5,26 +5,17 @@ import { useVehicleContext } from "../../context/ProductContext";
 import api from "../../services/api";
 
 
-function CarouselProducts({ props }: any) {
-
-  const { allVehicles, setAllVehicles } = useVehicleContext()
-
-  useEffect(() => {
-    api
-      .get(`/vehicles`)
-      .then((res) => setAllVehicles(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+function CarouselProducts({props, arr}: any) {
 
   return (
     <CarouselProductsContainer>
       {props === 'car'? 
-        allVehicles?.map((product, index) => product.type === props && (
-          <CardProdut key={product.id} product={product} type='motorcycles'/>
+        arr?.map((product: any) => product.type === props && (
+          <CardProdut key={product.id} product={product}/>
         ))
       :
-      allVehicles?.map((product, index) => product.type === props && (
-          <CardProdut key={product.id} product={product} type='motorcycles'/>
+        arr?.map((product: any) => product.type === props && (
+          <CardProdut key={product.id} product={product}/>
         ))
       }
     </CarouselProductsContainer>

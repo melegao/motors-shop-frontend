@@ -1,9 +1,9 @@
-import { CardProductContainer } from "./styles";
+import { CardProductContainer } from "./style";
 import { useNavigate } from "react-router-dom";
 
 
 
-function CardProdut ({product}: any) {
+function CardProdutOwner ({product, sellerName, sellerId}: any) {
 
     const navigate = useNavigate()
 
@@ -13,9 +13,8 @@ function CardProdut ({product}: any) {
     }
 
     const handleClickSeller = () => {
-        navigate(`/profile/${product.user.id}`)
+        navigate(`/profile/${sellerId}`)
     }
-
     
     return(
         <CardProductContainer>
@@ -28,11 +27,11 @@ function CardProdut ({product}: any) {
                 <div className="owner-initials" onClick={() => handleClickSeller()}>
                     <p>SL</p>
                 </div>
-                <p className="owner-name" onClick={() => handleClickSeller()}>{product.user.fullName}</p>
+                <p className="owner-name" onClick={() => handleClickSeller()}>{sellerName}</p>
             </div>
             <div className="product-details">
                 <div>
-                    <span>{product.km} KM</span>
+                    <span>{product.km}</span>
                     <span>{product.year}</span>
                 </div>
                 <p>{Number(product.price).toLocaleString("pt-BR", {
@@ -44,4 +43,4 @@ function CardProdut ({product}: any) {
     )
 }
 
-export default CardProdut
+export default CardProdutOwner

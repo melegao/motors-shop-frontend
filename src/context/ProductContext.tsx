@@ -25,7 +25,7 @@ interface IVehicle {
   vehicleImages: { id: string; url: string }[];
 }
 
-interface IUser {
+export interface IUser {
   address?: {
     city: string;
     complement?: string;

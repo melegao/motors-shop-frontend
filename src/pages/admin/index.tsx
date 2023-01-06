@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CarouselProductsOwner from "../../components/CarouselProductOwner";
 import CarouselProducts from "../../components/CarouselProducts";
 import CreateProductModal from "../../components/CreateProductModal";
 import Footer from "../../components/Footer";
 import Header from "../../components/header";
-import { useVehicleContext } from "../../context/ProductContext";
+import { IUser, useVehicleContext } from "../../context/ProductContext";
 import { BlueDiv, Container, Content, UserDiv } from "./styles";
 
 function Admin() {
   const [showCreateVehicleModal, setShowCreateVehicleModal] = useState(false);
 
   const { user } = useVehicleContext();
+  
+  const id = localStorage.getItem("@motorsShop:userId")
 
   return (
     <>
@@ -45,12 +48,12 @@ function Admin() {
 
           <div className="cars">
             <h3>Carros</h3>
-            <CarouselProducts props="car" />
+            <CarouselProductsOwner props="car" id={id}/>
           </div>
 
           <div className="motorcycles">
             <h3>Motos</h3>
-            <CarouselProducts props="motorcycle" />
+            <CarouselProductsOwner props="motorcycle" id={id}/>
           </div>
         </Content>
       </Container>
