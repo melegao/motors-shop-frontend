@@ -151,14 +151,15 @@ export const UserDiv = styled.div`
 
       border-radius: 50%;
 
-      width: 5rem;
-      height: 5rem;
+      width: 3rem;
+      height: 3rem;
 
       display: flex;
       justify-content: center;
       align-items: center;
 
       font-size: 36px;
+      padding: 2rem;
       font-weight: 500;
       color: var(--whiteFixed);
     }

@@ -51,8 +51,37 @@ export const ContainerHeader = styled.div`
         align-items: center;
         gap: 44px;
         padding-left: 44px;
+        cursor: pointer;
 
         p {
+            cursor: pointer;
+        }
+    }
+
+    .logged-menu-disable{
+        display: none;
+    }
+
+    .logged-menu {
+        background-color: white;
+        position: absolute;
+        right: 0.5rem;
+        top: 5rem;
+        width: 14rem;
+        
+        display: flex;
+        flex-direction: column;
+        z-index: 40;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.6rem 0.6rem;
+            gap: 1rem;
+        }
+
+        li {
             cursor: pointer;
         }
     }

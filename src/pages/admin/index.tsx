@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import CarouselProductsOwner from "../../components/CarouselProductOwner";
-import CarouselProducts from "../../components/CarouselProducts";
+import { useState } from "react";
+import CarouselAdmin from "../../components/CarouselAdmin";
 import CreateProductModal from "../../components/CreateProductModal";
 import Footer from "../../components/Footer";
 import Header from "../../components/header";
-import { IUser, useVehicleContext } from "../../context/ProductContext";
+import { useVehicleContext } from "../../context/ProductContext";
 import { BlueDiv, Container, Content, UserDiv } from "./styles";
 
 function Admin() {
@@ -48,12 +47,12 @@ function Admin() {
 
           <div className="cars">
             <h3>Carros</h3>
-            <CarouselProductsOwner props="car" id={id}/>
+            <CarouselAdmin props="car" id={id}/>
           </div>
 
           <div className="motorcycles">
             <h3>Motos</h3>
-            <CarouselProductsOwner props="motorcycle" id={id}/>
+            <CarouselAdmin props="motorcycle" id={id}/>
           </div>
         </Content>
       </Container>
