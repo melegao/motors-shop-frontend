@@ -8,7 +8,7 @@ import { useState } from "react";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 
-function SaleForm({ setShowCreateVehicleModal }: any) {
+function SaleForm({ setShowEditProductModal }: any) {
   const [vehicleType, setVehicleType] = useState("cars");
 
   const formSchema = yup.object().shape({
@@ -105,7 +105,7 @@ function SaleForm({ setShowCreateVehicleModal }: any) {
         .then((res) => {
           toast.success("Anúncio criado com sucesso!");
 
-          setTimeout(() => setShowCreateVehicleModal(false), 2000);
+          setTimeout(() => setShowEditProductModal(false), 2000);
         })
         .catch((err) => {
           console.log(err);
@@ -140,7 +140,7 @@ function SaleForm({ setShowCreateVehicleModal }: any) {
         .then((res) => {
           toast.success("Anúncio criado com sucesso!");
 
-          setTimeout(() => setShowCreateVehicleModal(false), 2000);
+          setTimeout(() => setShowEditProductModal(false), 2000);
         })
         .catch((err) => {
           console.log(err);
@@ -259,7 +259,7 @@ function SaleForm({ setShowCreateVehicleModal }: any) {
         <button
           className="cancel"
           type="button"
-          onClick={() => setShowCreateVehicleModal(false)}
+          onClick={() => setShowEditProductModal(false)}
         >
           Cancelar
         </button>

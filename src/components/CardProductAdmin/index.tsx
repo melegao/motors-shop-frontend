@@ -1,12 +1,16 @@
 import { CardProductContainer } from "./style";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/style";
+import { useState } from "react";
+import EditProductModal from "../EditProductModal";
 
 
 
 function CardProductAdmin ({product, sellerName, sellerId}: any) {
 
     const navigate = useNavigate()
+
+    const [showEditProductModal, setShowEditProductModal] = useState(false)
 
     const openProduct = (id: string) => {
         window.scrollTo(0, 0)
@@ -20,9 +24,14 @@ function CardProductAdmin ({product, sellerName, sellerId}: any) {
     const openProductPage = () => {
         navigate(`/product/${product.id}`)
     }
+
+    const handleModal = () => {
+        setShowEditProductModal(!showEditProductModal)
+    }
     
     return(
         <CardProductContainer>
+            {showEditProductModal && <EditProductModal setShowEditProductModal={setShowEditProductModal} productId={product.id}/>}
             <div className="product-image" onClick={() => openProduct(product.id)}>
                 <img src={product.coverImage} alt={product.name} width={310}/>
             </div>
@@ -45,7 +54,7 @@ function CardProductAdmin ({product, sellerName, sellerId}: any) {
                 })}</p>
             </div>
             <div className="product-btns-admin">
-                <Button>Editar</Button>
+                <Button onClick={() => handleModal()}>Editar</Button>
                 <Button onClick={() => openProductPage()}>Ver como</Button>
             </div>
         </CardProductContainer>
