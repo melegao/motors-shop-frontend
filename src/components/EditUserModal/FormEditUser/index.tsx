@@ -5,13 +5,31 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { IModal } from "../../../interfaces/showModal.interfaces";
+import { useContext, useEffect, useState } from "react";
+import api from "../../../services/api";
+import { IUserRequest } from "../../../interfaces/user.interface";
+import { EditProfileContext } from "../../../context/EditProfileContext";
+import { checkInfos } from "../../../utils/checkInfos";
 
 export const FormEditUser: React.FC<IModal> = ({
   setShowModal,
   setShowSuccessModal,
 }) => {
+  const { editProfile } = useContext(EditProfileContext);
+
+  const id = localStorage.getItem("@motorsShop:userId");
+  const [user, setUser] = useState({} as IUserRequest);
+
+  useEffect(() => {
+    api
+      .get(`users/${id}`)
+      .then((res) => setUser(res.data))
+      .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const schema = yup.object().shape({
-    name: yup
+    fullName: yup
       .string()
       .required("Required field")
       .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
@@ -23,14 +41,14 @@ export const FormEditUser: React.FC<IModal> = ({
         /([0-9]{2}[.]?[0-9]{3}[.]?[0-9]{3}[/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[.]?[0-9]{3}[.]?[0-9]{3}[-]?[0-9]{2})/,
         "invalid CPF"
       ),
-    phone: yup
+    cellPhone: yup
       .string()
       .required("Required field")
       .matches(
         /^\s*(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})[-. ]?\s*$/,
         "invalid phone number"
       ),
-    birthday: yup
+    birthDate: yup
       .date()
       .required("Required field")
       .typeError("Please enter a valid date")
@@ -45,13 +63,32 @@ export const FormEditUser: React.FC<IModal> = ({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema), reValidateMode: "onSubmit" });
 
   const onSubmit = (data: object) => {
+
+    const fixedData = checkInfos(data, user);
+    editProfile(id!, fixedData, false);
     setShowModal(false);
     setShowSuccessModal(true);
   };
+
+  useEffect(() => {
+    if (user.fullName !== undefined) {
+      let defaultValues: IUserRequest = {} as IUserRequest;
+      defaultValues.fullName = user.fullName;
+      defaultValues.email = user.email;
+      defaultValues.cpf = user.cpf;
+      defaultValues.cellPhone = user.cellPhone;
+      defaultValues.birthDate = user.birthDate.slice(0, 10);
+      defaultValues.description = user.description;
+
+      reset({ ...defaultValues });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reset, user]);
 
   return (
     <>
@@ -65,8 +102,8 @@ export const FormEditUser: React.FC<IModal> = ({
           label="Nome"
           placeholder="Ex: Samuel Leão"
           register={register}
-          name="name"
-          error={errors?.name?.message}
+          name="fullName"
+          error={errors?.fullName?.message}
         ></InputBase>
 
         <InputBase
@@ -95,8 +132,8 @@ export const FormEditUser: React.FC<IModal> = ({
           label="Celular"
           placeholder="(DDD) 90000-0000"
           register={register}
-          name="phone"
-          error={errors?.phone?.message}
+          name="cellPhone"
+          error={errors?.cellPhone?.message}
         ></InputBase>
 
         <InputBase
@@ -104,8 +141,8 @@ export const FormEditUser: React.FC<IModal> = ({
           type="date"
           label="Data de nascimento"
           register={register}
-          name="birthday"
-          error={errors?.birthday?.message}
+          name="birthDate"
+          error={errors?.birthDate?.message}
         ></InputBase>
 
         <div className="description">

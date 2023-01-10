@@ -5,7 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { IModal } from "../../../interfaces/showModal.interfaces";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { EditProfileContext } from "../../../context/EditProfileContext";
+import { IUserAddressRequest } from "../../../interfaces/user.interface";
+import api from "../../../services/api";
+import { checkInfos } from "../../../utils/checkInfos";
 
 export const FormEditAddress: React.FC<IModal> = ({
   setShowModal,
@@ -13,19 +17,29 @@ export const FormEditAddress: React.FC<IModal> = ({
 }) => {
   const [state, setState] = useState(false);
 
+  const { editProfile } = useContext(EditProfileContext);
+
+  const id = localStorage.getItem("@motorsShop:userId");
+  const [userAddress, setUserAddress] = useState({} as IUserAddressRequest);
+
+  useEffect(() => {
+    api
+      .get(`users/${id}`)
+      .then((res) => setUserAddress(res.data.address))
+      .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const schema = yup.object().shape({
-    cep: yup
+    zipCode: yup
       .string()
       .required("Required field")
-      .matches(/^[0-9]{5}[-]?[0-9]{3}$/, "CEP inválido"),
+      .matches(/^[0-9]{5}[-]?[0-9]{3}$/, "zipCode Invalid"),
     state: yup
       .string()
       .required("Required field")
       .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
-    city: yup
-      .string()
-      .required("Required field")
-      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
+    city: yup.string().required("Required field"),
     street: yup.string().required("Required field"),
     number: yup
       .number()
@@ -36,17 +50,42 @@ export const FormEditAddress: React.FC<IModal> = ({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema), reValidateMode: "onSubmit" });
 
   const onSubmit = (data: object) => {
+
+    const fixedData = checkInfos(data, userAddress);
+    editProfile(id!, fixedData, true);
+
     setShowModal(false);
     setShowSuccessModal(true);
   };
 
+  useEffect(() => {
+    if (userAddress.zipCode !== undefined) {
+      let defaultValues: IUserAddressRequest = {} as IUserAddressRequest;
+      defaultValues.city = userAddress.city;
+      defaultValues.complement = userAddress.complement;
+      defaultValues.number = userAddress.number;
+      defaultValues.state = userAddress.state;
+      defaultValues.street = userAddress.street;
+      defaultValues.zipCode = userAddress.zipCode;
+
+      reset({ ...defaultValues });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reset, userAddress]);
+
   return (
     <>
-      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <StyledForm
+        onClick={() => {
+          setState(true);
+        }}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="subTitle">
           <h2>Infomações de endereço</h2>
         </div>
@@ -56,13 +95,13 @@ export const FormEditAddress: React.FC<IModal> = ({
           label="CEP"
           placeholder="00000.000"
           register={register}
-          name="cep"
-          error={errors?.cep?.message}
+          name="zipCode"
+          error={errors?.zipCode?.message}
         ></InputBase>
 
         <div
           className="city--infos"
-          onChange={() => {
+          onClick={() => {
             setState(true);
           }}
         >
@@ -114,7 +153,7 @@ export const FormEditAddress: React.FC<IModal> = ({
             label="Complemento"
             register={register}
             placeholder="Ex: apart 307"
-            name="inAdd"
+            name="complement"
           ></InputBase>
         </div>
         <div className="button--box">

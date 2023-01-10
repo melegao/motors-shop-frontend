@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/style";
 import { useVehicleContext } from "../../context/ProductContext";
 import { toast } from "react-toastify";
+import EditUserModal from "../EditUserModal";
+import { SuccessModal } from "../Modal";
+import EditAddressModal from "../EditAdressModal";
 
 function Header() {
   const navigate = useNavigate();
@@ -17,6 +20,10 @@ function Header() {
   const [classNameLoggedMenu, setClassNameLoggedMenu] = useState(
     "logged-menu-disable"
   );
+
+  const [showModalProfile, setShowModalProfile] = useState(false);
+  const [showModalAddress, setShowModalAddress] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleHeaderMenu = () => {
     setHeaderMenuName(!headerMenuName);
@@ -49,6 +56,27 @@ function Header() {
 
   return (
     <ContainerHeader>
+      {showModalProfile && (
+        <EditUserModal
+          setShowModal={setShowModalProfile}
+          setShowSuccessModal={setShowSuccessModal}
+        />
+      )}
+      {showModalAddress && (
+        <EditAddressModal
+          setShowModal={setShowModalAddress}
+          setShowSuccessModal={setShowSuccessModal}
+        />
+      )}
+      {showSuccessModal && (
+        <SuccessModal
+          header="Sucesso!"
+          setShowSuccessModal={setShowSuccessModal}
+          title="Sua conta foi editada com sucesso!"
+          text="Agora você poderá ver seus negócios crescendo em grande escala"
+        />
+      )}
+
       <div onClick={() => navigate("/")} className="header-logo">
         <img src={logo} alt="Motors Shop" />
       </div>
@@ -71,9 +99,11 @@ function Header() {
             </div>
             <div className={classNameLoggedMenu}>
               <ul>
-                <li onClick={() => navigate("/admin")}>Editar Perfil</li>
-                <li>Editar Endereço</li>
-                <li>Minhas Compras</li>
+                <li onClick={() => setShowModalProfile(true)}>Editar Perfil</li>
+                <li onClick={() => setShowModalAddress(true)}>
+                  Editar Endereço
+                </li>
+                <li onClick={() => navigate("/admin")}>Meus Anúncios</li>
                 <li onClick={() => handleLogout()}>Sair</li>
               </ul>
             </div>
