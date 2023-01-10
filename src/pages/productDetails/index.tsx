@@ -41,6 +41,7 @@ function ProductDetails() {
         setVehicle(res.data);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClickSeller = () => {
@@ -89,7 +90,7 @@ function ProductDetails() {
             <h2>Descrição</h2>
             <p>{vehicle?.description}</p>
           </div>
-          <CommentSection />
+          <CommentSection id={id!} />
           <CreateComment />
           <div className="div-photos">
             <h2>Fotos</h2>

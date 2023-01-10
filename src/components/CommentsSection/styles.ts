@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
-export {};
-
 export const Container = styled.div`
   background-color: var(--grey10);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 15px;
+  gap: 25px;
   padding: 36px 28px;
   border-radius: 4px;
 
