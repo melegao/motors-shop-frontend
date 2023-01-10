@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import EditSaleForm from "../EditSaleForm";
-import SaleForm from "../SaleForm";
 import { Container } from "./styles";
 
-function EditProductModal({ setShowEditProductModal, productId }: any) {
+function EditProductModal({
+  setShowEditProductModal,
+  productId,
+  setShowDeleteModal,
+}: any) {
   const [saleType, setSaleType] = useState("sale");
 
   return (
@@ -37,6 +40,7 @@ function EditProductModal({ setShowEditProductModal, productId }: any) {
         <EditSaleForm
           setShowEditProductModal={setShowEditProductModal}
           productId={productId}
+          setShowDeleteModal={setShowDeleteModal}
         />
       </div>
     </Container>

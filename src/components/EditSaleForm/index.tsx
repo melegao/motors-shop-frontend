@@ -1,20 +1,31 @@
 import { InputBase } from "../Input";
 import { Form } from "./styles";
-
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 
-function EditSaleForm({ setShowCreateVehicleModal, productId }: any) {
-  const [vehicleType, setVehicleType] = useState("cars");
+function EditSaleForm({
+  setShowEditProductModal,
+  productId,
+  setShowDeleteModal,
+}: any) {
+  const [vehicleType, setVehicleType] = useState("car");
+  const [vehicleInfo, setVehicleInfo] = useState<IVehicleRegister>();
 
-    console.log(productId)
+  useEffect(() => {
+    api
+      .get(`vehicles/${productId}`)
+      .then((res) => setVehicleInfo(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const userToken = localStorage.getItem("@motorsShop:token");
 
   const formSchema = yup.object().shape({
-    name: yup.string().required("Campo obrigatório"),
+    name: yup.string(),
     description: yup.string().required("Campo obrigatório"),
     km: yup
       .string()
@@ -44,8 +55,8 @@ function EditSaleForm({ setShowCreateVehicleModal, productId }: any) {
     year: number;
     coverImage: string;
     price: number;
-    carPhotos?: string[];
-    motorcyclePhotos?: string[];
+    type: string;
+    vehicleImages?: { id: string; url: string }[];
     photo1: string;
     photo2?: string;
     photo3?: string;
@@ -78,77 +89,52 @@ function EditSaleForm({ setShowCreateVehicleModal, productId }: any) {
       photo6,
     } = data;
 
-    if (vehicleType === "cars") {
-      const carPhotos = [photo1];
-      if (photo2) {
-        carPhotos.push(photo2);
-      } else if (photo3) {
-        carPhotos.push(photo3);
-      } else if (photo4) {
-        carPhotos.push(photo4);
-      } else if (photo5) {
-        carPhotos.push(photo5);
-      } else if (photo6) {
-        carPhotos.push(photo6);
-      }
-
-      const carData = {
-        name,
-        description,
-        km,
-        year,
-        coverImage,
-        price,
-        carPhotos,
-      };
-
-      api
-        .post("/cars", carData)
-        .then((res) => {
-          toast.success("Anúncio criado com sucesso!");
-
-          setTimeout(() => setShowCreateVehicleModal(false), 2000);
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error("Deu ruim");
-        });
-    } else {
-      const motorcyclePhotos = [photo1];
-      if (photo2) {
-        motorcyclePhotos.push(photo2);
-      } else if (photo3) {
-        motorcyclePhotos.push(photo3);
-      } else if (photo4) {
-        motorcyclePhotos.push(photo4);
-      } else if (photo5) {
-        motorcyclePhotos.push(photo5);
-      } else if (photo6) {
-        motorcyclePhotos.push(photo6);
-      }
-
-      const motorcycleData = {
-        name,
-        description,
-        km,
-        year,
-        coverImage,
-        price,
-        motorcyclePhotos,
-      };
-
-      api
-        .post("/motorcycles", motorcycleData)
-        .then((res) => {
-          toast.success("Anúncio criado com sucesso!");
-
-          setTimeout(() => setShowCreateVehicleModal(false), 2000);
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error("Deu ruim");
-        });
+    const vehiclePhotos = [photo1];
+    if (photo2) {
+      vehiclePhotos.push(photo2);
     }
+    if (photo3) {
+      vehiclePhotos.push(photo3);
+    }
+    if (photo4) {
+      vehiclePhotos.push(photo4);
+    }
+    if (photo5) {
+      vehiclePhotos.push(photo5);
+    }
+    if (photo6) {
+      vehiclePhotos.push(photo6);
+    }
+
+    const vehicleData = {
+      name,
+      description,
+      km,
+      year,
+      coverImage,
+      price,
+      type: vehicleType,
+      vehiclePhotos,
+    };
+
+    api
+      .patch(`vehicles/${productId}`, vehicleData, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      })
+      .then((res) => {
+        toast.success("Anúncio atualizado com sucesso!");
+
+        setTimeout(() => setShowEditProductModal(false), 2000);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Algo deu errado");
+      });
+  };
+
+  const handleDeleteButton = () => {
+    setShowEditProductModal(false);
+    setShowDeleteModal(true);
   };
 
   return (
@@ -161,6 +147,7 @@ function EditSaleForm({ setShowCreateVehicleModal, productId }: any) {
         register={register}
         name="name"
         error={errors?.name?.message}
+        defaultValue={vehicleInfo?.name}
       />
       <div className="flex-row">
         <InputBase
@@ -171,6 +158,7 @@ function EditSaleForm({ setShowCreateVehicleModal, productId }: any) {
           register={register}
           name="year"
           error={errors?.year?.message}
+          defaultValue={vehicleInfo?.year}
         />
         <InputBase
           width="100%"
@@ -180,6 +168,7 @@ function EditSaleForm({ setShowCreateVehicleModal, productId }: any) {
           register={register}
           name="km"
           error={errors?.km?.message}
+          defaultValue={vehicleInfo?.km}
         />
       </div>
       <InputBase
@@ -190,12 +179,14 @@ function EditSaleForm({ setShowCreateVehicleModal, productId }: any) {
         register={register}
         name="price"
         error={errors?.price?.message}
+        defaultValue={vehicleInfo?.price}
       />
 
       <div className="description">
         <label>Descrição</label>
         <textarea
           placeholder="Digitar descrição"
+          defaultValue={vehicleInfo?.description}
           {...register("description")}
         ></textarea>
         {errors?.description?.message && (
@@ -211,16 +202,16 @@ function EditSaleForm({ setShowCreateVehicleModal, productId }: any) {
         <p>Tipo de veículo</p>
         <div className="buttons">
           <button
-            className={vehicleType === "cars" ? "selected" : "notSelected"}
+            className={vehicleType === "car" ? "selected" : "notSelected"}
             type="button"
-            onClick={() => setVehicleType("cars")}
+            onClick={() => setVehicleType("car")}
           >
             Carro
           </button>
           <button
-            className={vehicleType === "cars" ? "notSelected" : "selected"}
+            className={vehicleType === "car" ? "notSelected" : "selected"}
             type="button"
-            onClick={() => setVehicleType("motorcycles")}
+            onClick={() => setVehicleType("motorcycle")}
           >
             Moto
           </button>
@@ -235,38 +226,33 @@ function EditSaleForm({ setShowCreateVehicleModal, productId }: any) {
         register={register}
         name="coverImage"
         error={errors?.coverImage?.message}
+        defaultValue={vehicleInfo?.coverImage}
       />
 
-      <InputBase
-        width="100%"
-        type="text"
-        label="1ª Imagem da galeria"
-        placeholder="http://image.com"
-        register={register}
-        name="photo1"
-        error={errors?.photo1?.message}
-      />
-
-      <InputBase
-        width="100%"
-        type="text"
-        label="2ª Imagem da galeria"
-        placeholder="http://image.com"
-        register={register}
-        name="photo2"
-        error={errors?.photo2?.message}
-      />
+      {vehicleInfo?.vehicleImages?.map((elem, index) => (
+        <InputBase
+          key={index}
+          width="100%"
+          type="text"
+          label={index + 1 + "ª Foto da galeria"}
+          placeholder="http://image.com"
+          register={register}
+          name={`photo${index + 1}`}
+          error={index === 0 && errors.photo1?.message}
+          defaultValue={elem.url}
+        />
+      ))}
 
       <div className="final-buttons">
         <button
           className="cancel"
           type="button"
-          onClick={() => setShowCreateVehicleModal(false)}
+          onClick={() => handleDeleteButton()}
         >
-          Cancelar
+          Excluir anúncio
         </button>
         <button className="create" type="submit">
-          Criar anúncio
+          Salvar alterações
         </button>
       </div>
     </Form>

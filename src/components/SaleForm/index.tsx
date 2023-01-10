@@ -1,6 +1,5 @@
 import { InputBase } from "../Input";
 import { Form } from "./styles";
-
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -8,8 +7,10 @@ import { useState } from "react";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 
-function SaleForm({ setShowEditProductModal }: any) {
-  const [vehicleType, setVehicleType] = useState("cars");
+function SaleForm({ setShowCreateVehicleModal }: any) {
+  const [vehicleType, setVehicleType] = useState("car");
+
+  const userToken = localStorage.getItem("@motorsShop:token");
 
   const formSchema = yup.object().shape({
     name: yup.string().required("Campo obrigatório"),
@@ -42,8 +43,8 @@ function SaleForm({ setShowEditProductModal }: any) {
     year: number;
     coverImage: string;
     price: number;
-    carPhotos?: string[];
-    motorcyclePhotos?: string[];
+    type: string;
+    vehiclePhotos?: string[];
     photo1: string;
     photo2?: string;
     photo3?: string;
@@ -76,77 +77,43 @@ function SaleForm({ setShowEditProductModal }: any) {
       photo6,
     } = data;
 
-    if (vehicleType === "cars") {
-      const carPhotos = [photo1];
-      if (photo2) {
-        carPhotos.push(photo2);
-      } else if (photo3) {
-        carPhotos.push(photo3);
-      } else if (photo4) {
-        carPhotos.push(photo4);
-      } else if (photo5) {
-        carPhotos.push(photo5);
-      } else if (photo6) {
-        carPhotos.push(photo6);
-      }
-
-      const carData = {
-        name,
-        description,
-        km,
-        year,
-        coverImage,
-        price,
-        carPhotos,
-      };
-
-      api
-        .post("/cars", carData)
-        .then((res) => {
-          toast.success("Anúncio criado com sucesso!");
-
-          setTimeout(() => setShowEditProductModal(false), 2000);
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error("Deu ruim");
-        });
-    } else {
-      const motorcyclePhotos = [photo1];
-      if (photo2) {
-        motorcyclePhotos.push(photo2);
-      } else if (photo3) {
-        motorcyclePhotos.push(photo3);
-      } else if (photo4) {
-        motorcyclePhotos.push(photo4);
-      } else if (photo5) {
-        motorcyclePhotos.push(photo5);
-      } else if (photo6) {
-        motorcyclePhotos.push(photo6);
-      }
-
-      const motorcycleData = {
-        name,
-        description,
-        km,
-        year,
-        coverImage,
-        price,
-        motorcyclePhotos,
-      };
-
-      api
-        .post("/motorcycles", motorcycleData)
-        .then((res) => {
-          toast.success("Anúncio criado com sucesso!");
-
-          setTimeout(() => setShowEditProductModal(false), 2000);
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error("Deu ruim");
-        });
+    const vehiclePhotos = [photo1];
+    if (photo2) {
+      vehiclePhotos.push(photo2);
+    } else if (photo3) {
+      vehiclePhotos.push(photo3);
+    } else if (photo4) {
+      vehiclePhotos.push(photo4);
+    } else if (photo5) {
+      vehiclePhotos.push(photo5);
+    } else if (photo6) {
+      vehiclePhotos.push(photo6);
     }
+
+    const vehicleData = {
+      name,
+      description,
+      km,
+      year,
+      coverImage,
+      price,
+      type: vehicleType,
+      vehiclePhotos,
+    };
+
+    api
+      .post("/vehicles", vehicleData, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      })
+      .then((res) => {
+        toast.success("Anúncio criado com sucesso!");
+
+        setTimeout(() => setShowCreateVehicleModal(false), 2000);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Algo deu errado");
+      });
   };
 
   return (
@@ -209,16 +176,16 @@ function SaleForm({ setShowEditProductModal }: any) {
         <p>Tipo de veículo</p>
         <div className="buttons">
           <button
-            className={vehicleType === "cars" ? "selected" : "notSelected"}
+            className={vehicleType === "car" ? "selected" : "notSelected"}
             type="button"
-            onClick={() => setVehicleType("cars")}
+            onClick={() => setVehicleType("car")}
           >
             Carro
           </button>
           <button
-            className={vehicleType === "cars" ? "notSelected" : "selected"}
+            className={vehicleType === "car" ? "notSelected" : "selected"}
             type="button"
-            onClick={() => setVehicleType("motorcycles")}
+            onClick={() => setVehicleType("motorcycle")}
           >
             Moto
           </button>
@@ -259,7 +226,7 @@ function SaleForm({ setShowEditProductModal }: any) {
         <button
           className="cancel"
           type="button"
-          onClick={() => setShowEditProductModal(false)}
+          onClick={() => setShowCreateVehicleModal(false)}
         >
           Cancelar
         </button>

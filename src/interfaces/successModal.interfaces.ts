@@ -7,4 +7,5 @@ export interface IModalSuccess {
 
 export interface IModalDelete {
   setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  productId: string;
 }

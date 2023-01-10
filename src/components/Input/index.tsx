@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { InputStyled, StyledDiv } from "./style";
 
 interface InputProps {
-  label?: string;
+  label?: string | number;
   children?: ReactNode | string;
   placeholder?: string;
   type?: string;
@@ -10,6 +10,7 @@ interface InputProps {
   name?: string;
   error?: any;
   width: string;
+  defaultValue?: any;
 }
 
 export const InputBase = ({

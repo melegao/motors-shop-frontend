@@ -9,19 +9,6 @@ import { useEffect } from "react";
 
 function Ways() {
 
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const userdId = localStorage.getItem("@motorsShop:userId")
-  //   const isSeller = localStorage.getItem("@motorsShop:isSeller")
-  //   console.log(isSeller)
-  //   if (isSeller === "false"){
-  //     navigate('/')
-  //   }
-  // }, [])
-
-  
-
 
   return (
     <>

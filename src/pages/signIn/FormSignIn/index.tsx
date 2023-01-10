@@ -107,7 +107,6 @@ export const FormSignIn: React.FC<IModalSuccess> = ({
         setTimeout(() => navigate("/login"), 3000);
       })
       .catch((err) => {
-        console.log(err);
         if (err.response.data.message === "This email already exist.") {
           toast.error("Email já cadastrado.");
         }
