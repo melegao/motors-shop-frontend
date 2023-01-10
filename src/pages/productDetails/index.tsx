@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
 import api from "../../services/api";
 import CreateComment from "../../components/CreateComment";
+import CommentSection from "../../components/CommentsSection";
 
 function ProductDetails() {
   interface IVehicle {
@@ -88,6 +89,7 @@ function ProductDetails() {
             <h2>Descrição</h2>
             <p>{vehicle?.description}</p>
           </div>
+          <CommentSection />
           <CreateComment />
           <div className="div-photos">
             <h2>Fotos</h2>
