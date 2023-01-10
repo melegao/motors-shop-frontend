@@ -1,9 +1,11 @@
 import { MdClose } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   IModalDelete,
   IModalSuccess,
 } from "../../interfaces/successModal.interfaces";
+import api from "../../services/api";
 import { ButtonBase } from "../Button";
 import { Container } from "./styles";
 
@@ -41,7 +43,19 @@ export const SuccessModal: React.FC<IModalSuccess> = ({
   );
 };
 
-export const DeleteModal: React.FC<IModalDelete> = ({ setShowDeleteModal }) => {
+export const DeleteModal: React.FC<IModalDelete> = ({
+  setShowDeleteModal,
+  productId,
+}) => {
+  const userToken = localStorage.getItem("@motorsShop:token");
+  const handleDelete = (data: any) => {
+    if (data.status === 204) {
+      toast.success("Veículo deletado!");
+      setShowDeleteModal(false);
+    } else {
+      toast.error("Não foi possível deletar!");
+    }
+  };
   return (
     <Container>
       <div className="modal">
@@ -69,7 +83,12 @@ export const DeleteModal: React.FC<IModalDelete> = ({ setShowDeleteModal }) => {
               width="50%"
               colorbutton="Alert"
               onClick={() => {
-                console.log("Deletado");
+                api
+                  .delete(`vehicles/${productId}`, {
+                    headers: { Authorization: `Bearer ${userToken}` },
+                  })
+                  .then((res) => handleDelete(res))
+                  .catch((err) => toast.error("Não foi possível deletar!"));
               }}
             >
               Sim, excluir anúncio

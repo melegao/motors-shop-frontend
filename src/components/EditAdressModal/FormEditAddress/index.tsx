@@ -55,8 +55,10 @@ export const FormEditAddress: React.FC<IModal> = ({
   } = useForm({ resolver: yupResolver(schema), reValidateMode: "onSubmit" });
 
   const onSubmit = (data: object) => {
+
     const fixedData = checkInfos(data, userAddress);
     editProfile(id!, fixedData, true);
+
     setShowModal(false);
     setShowSuccessModal(true);
   };

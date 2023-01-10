@@ -37,7 +37,6 @@ function Header() {
 
   const changeLoggedMenu = () => {
     setHandleLoggedMenu(!handleLoggedMenu);
-    console.log(handleLoggedMenu);
 
     if (handleLoggedMenu === true) {
       setClassNameLoggedMenu("logged-menu");

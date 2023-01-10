@@ -12,4 +12,5 @@ export interface IFormSignIn {
 
 export interface IModalDelete {
   setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  productId: string;
 }

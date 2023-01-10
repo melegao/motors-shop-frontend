@@ -68,6 +68,7 @@ export const FormEditUser: React.FC<IModal> = ({
   } = useForm({ resolver: yupResolver(schema), reValidateMode: "onSubmit" });
 
   const onSubmit = (data: object) => {
+
     const fixedData = checkInfos(data, user);
     editProfile(id!, fixedData, false);
     setShowModal(false);
