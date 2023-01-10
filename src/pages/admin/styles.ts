@@ -97,6 +97,7 @@ export const Content = styled.div`
       display: flex;
       flex-direction: column;
       gap: 37px;
+      
 
       h3 {
         font-family: "Lexend", sans-serif;

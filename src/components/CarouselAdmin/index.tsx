@@ -26,7 +26,7 @@ function CarouselAdmin({props, id}: any) {
         ))
       :
         userInfo?.vehicle?.map((elem) => elem.type === props && (
-          <CardProdutOwner key={elem.id} product={elem} sellerName={userInfo.fullName} sellerId={id}/>
+          <CardProductAdmin key={elem.id} product={elem} sellerName={userInfo.fullName} sellerId={id}/>
         ))
       }
     </CarouselProductsContainer>
