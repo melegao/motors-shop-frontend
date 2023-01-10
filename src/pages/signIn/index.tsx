@@ -15,6 +15,7 @@ export const SignInPage = () => {
           <FormSignIn setShowSuccessModal={setState} />
           {state && (
             <SuccessModal
+              header="Sucesso!"
               setShowSuccessModal={setState}
               title="Sua conta foi criada com sucesso!"
               text="Agora você poderá ver seus negócios crescendo em grande escala"

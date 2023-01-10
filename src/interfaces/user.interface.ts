@@ -1,3 +1,5 @@
+import { FieldValues } from "react-hook-form";
+
 export interface IUserFullData {
   birthDate: string;
   cellPhone: string;
@@ -17,6 +19,7 @@ export interface IUserFullData {
 }
 
 export interface IUserAddressRequest {
+  id?: string;
   street: string;
   number: string;
   complement?: string;
@@ -35,4 +38,18 @@ export interface IUserRequest {
   isSeller: boolean;
   password: string;
   address: IUserAddressRequest;
+}
+
+export interface IUserEditContext {
+  isDone: boolean;
+  isError: boolean;
+  message: string;
+  setIsDone: React.Dispatch<React.SetStateAction<boolean>>;
+  editProfile: Function;
+}
+
+export interface IEditProfile {
+  id: string;
+  data: FieldValues;
+  address: boolean;
 }

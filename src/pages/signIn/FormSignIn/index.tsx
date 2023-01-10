@@ -5,15 +5,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { IModalSuccess } from "../../../interfaces/successModal.interfaces";
+import { IFormSignIn } from "../../../interfaces/successModal.interfaces";
 import { IUserRequest } from "../../../interfaces/user.interface";
 import api from "../../../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-export const FormSignIn: React.FC<IModalSuccess> = ({
-  setShowSuccessModal,
-}) => {
+export const FormSignIn: React.FC<IFormSignIn> = ({ setShowSuccessModal }) => {
   const navigate = useNavigate();
   const [isBuyer, setIsBuyer] = useState(false);
   const [isSellerColor, setIsSellerColor] = useState(false);
