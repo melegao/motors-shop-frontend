@@ -9,6 +9,7 @@ import { Container } from "./styles";
 
 export const SuccessModal: React.FC<IModalSuccess> = ({
   setShowSuccessModal,
+  header,
   text,
   title,
   type,
@@ -18,7 +19,7 @@ export const SuccessModal: React.FC<IModalSuccess> = ({
     <Container>
       <div className="modal">
         <header>
-          <h2>Sucesso!</h2>
+          <h2>{header}</h2>
           <MdClose onClick={() => setShowSuccessModal(false)} />
         </header>
         <section>

@@ -9,16 +9,15 @@ import api from "../../services/api";
 import { HomeContainer } from "./styles";
 
 function Home() {
-
-  const { allVehicles, setAllVehicles } = useVehicleContext()
+  const { allVehicles, setAllVehicles } = useVehicleContext();
 
   useEffect(() => {
     api
       .get(`/vehicles`)
       .then((res) => setAllVehicles(res.data))
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   return (
     <>
@@ -39,11 +38,11 @@ function Home() {
 
         <div className="div-carros">
           <h3>Carros</h3>
-          <CarouselProducts props="car" arr={allVehicles}/>
+          <CarouselProducts props="car" arr={allVehicles} />
         </div>
         <div className="div-motos">
           <h3>Motos</h3>
-          <CarouselProducts props="motorcycle" arr={allVehicles}/>
+          <CarouselProducts props="motorcycle" arr={allVehicles} />
         </div>
       </HomeContainer>
       <Footer />
