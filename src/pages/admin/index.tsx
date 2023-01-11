@@ -26,7 +26,11 @@ function Admin() {
           <UserDiv>
             <BlueDiv />
             <div className="userInfo">
-              <div className="photo">SL</div>
+              <div className="photo">{`${user?.fullName.split(" ")[0][0]}${
+                user?.fullName.split(" ")[
+                  user?.fullName.split(" ").length - 1
+                ][0]
+              }`}</div>
               <h2 className="nameTitle">
                 {user?.fullName} <span>Anunciante</span>
               </h2>

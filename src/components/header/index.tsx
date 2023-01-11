@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ContainerHeader } from "./styles";
 import logo from "../../assets/logo/logo-motors-shop.svg";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,6 @@ import EditUserModal from "../EditUserModal";
 import { SuccessModal } from "../Modal";
 import EditAddressModal from "../EditAdressModal";
 import { HashLink } from "react-router-hash-link";
-import { userInitials } from "../../utils/userInitials";
 
 function Header() {
   const navigate = useNavigate();
@@ -22,7 +21,6 @@ function Header() {
   const [classNameLoggedMenu, setClassNameLoggedMenu] = useState(
     "logged-menu-disable"
   );
-  const [userName, setUserName] = useState("");
 
   const [showModalProfile, setShowModalProfile] = useState(false);
   const [showModalAddress, setShowModalAddress] = useState(false);
@@ -56,12 +54,6 @@ function Header() {
       navigate("/");
     }, 1000);
   };
-
-  useEffect(() => {
-    if (logged) {
-      setUserName(user!.fullName);
-    }
-  }, []);
 
   return (
     <ContainerHeader>
@@ -116,7 +108,12 @@ function Header() {
         {logged ? (
           <>
             <div className="login-area" onClick={() => changeLoggedMenu()}>
-              <span>{userInitials(userName)}</span> {userName}
+              <span>{`${user?.fullName.split(" ")[0][0]}${
+                user?.fullName.split(" ")[
+                  user?.fullName.split(" ").length - 1
+                ][0]
+              }`}</span>
+              {user?.fullName}
             </div>
             <div className={classNameLoggedMenu}>
               <ul>
