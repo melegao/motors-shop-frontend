@@ -80,13 +80,17 @@ function SaleForm({ setShowCreateVehicleModal }: any) {
     const vehiclePhotos = [photo1];
     if (photo2) {
       vehiclePhotos.push(photo2);
-    } else if (photo3) {
+    }
+    if (photo3) {
       vehiclePhotos.push(photo3);
-    } else if (photo4) {
+    }
+    if (photo4) {
       vehiclePhotos.push(photo4);
-    } else if (photo5) {
+    }
+    if (photo5) {
       vehiclePhotos.push(photo5);
-    } else if (photo6) {
+    }
+    if (photo6) {
       vehiclePhotos.push(photo6);
     }
 
@@ -220,6 +224,46 @@ function SaleForm({ setShowCreateVehicleModal }: any) {
         register={register}
         name="photo2"
         error={errors?.photo2?.message}
+      />
+
+      <InputBase
+        width="100%"
+        type="text"
+        label="3ª Imagem da galeria"
+        placeholder="http://image.com"
+        register={register}
+        name="photo3"
+        error={errors?.photo3?.message}
+      />
+
+      <InputBase
+        width="100%"
+        type="text"
+        label="4ª Imagem da galeria"
+        placeholder="http://image.com"
+        register={register}
+        name="photo4"
+        error={errors?.photo4?.message}
+      />
+
+      <InputBase
+        width="100%"
+        type="text"
+        label="5ª Imagem da galeria"
+        placeholder="http://image.com"
+        register={register}
+        name="photo5"
+        error={errors?.photo5?.message}
+      />
+
+      <InputBase
+        width="100%"
+        type="text"
+        label="6ª Imagem da galeria"
+        placeholder="http://image.com"
+        register={register}
+        name="photo6"
+        error={errors?.photo6?.message}
       />
 
       <div className="final-buttons">
