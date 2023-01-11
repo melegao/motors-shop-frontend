@@ -26,6 +26,8 @@ function Header() {
   const [showModalAddress, setShowModalAddress] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+  const isSeller = localStorage.getItem("@motorsShop:isSeller");
+
   const handleHeaderMenu = () => {
     setHeaderMenuName(!headerMenuName);
 
@@ -121,7 +123,9 @@ function Header() {
                 <li onClick={() => setShowModalAddress(true)}>
                   Editar Endereço
                 </li>
-                <li onClick={() => navigate("/admin")}>Meus Anúncios</li>
+                {user?.isSeller && (
+                  <li onClick={() => navigate("/admin")}>Meus Anúncios</li>
+                )}
                 <li onClick={() => handleLogout()}>Sair</li>
               </ul>
             </div>
