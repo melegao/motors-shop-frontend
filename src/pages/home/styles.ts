@@ -3,6 +3,17 @@ import styled from "styled-components";
 export const HomeContainer = styled.div`
   position: relative;
 
+  .text-decoration {
+    a {
+      font-family: Inter;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 28px;
+
+      color: var(--whiteFixed);
+    }
+  }
+
   @media (max-width: 800px) {
     .div-initial-information {
       background-color: var(--brand2);
@@ -127,6 +138,7 @@ export const HomeContainer = styled.div`
         align-items: center;
         gap: 21px;
         width: 100%;
+        max-width: 381.04px;
       }
     }
 
