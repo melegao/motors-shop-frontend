@@ -11,17 +11,17 @@ import GlobalStyle from "./styles/global";
 function App() {
   return (
     <>
-      <CheckTypeProvider>
-        <EditProfileProvider>
-          <CheckCommentProvider>
-            <VehicleProvider>
+      <EditProfileProvider>
+        <CheckCommentProvider>
+          <VehicleProvider>
+            <CheckTypeProvider>
               <GlobalStyle />
               <Ways />
               <ToastContainer />
-            </VehicleProvider>
-          </CheckCommentProvider>
-        </EditProfileProvider>
-      </CheckTypeProvider>
+            </CheckTypeProvider>
+          </VehicleProvider>
+        </CheckCommentProvider>
+      </EditProfileProvider>
     </>
   );
 }
