@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import { MdClose } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { UpdateApiContext } from "../../context/UpdateApi";
 import {
   IModalDelete,
   IModalSuccess,
@@ -47,11 +49,13 @@ export const DeleteModal: React.FC<IModalDelete> = ({
   setShowDeleteModal,
   productId,
 }) => {
+  const { setUpdateApi, updateApi} = useContext(UpdateApiContext);
   const userToken = localStorage.getItem("@motorsShop:token");
   const handleDelete = (data: any) => {
     if (data.status === 204) {
       toast.success("Veículo deletado!");
       setShowDeleteModal(false);
+      setUpdateApi(!updateApi)
     } else {
       toast.error("Não foi possível deletar!");
     }
