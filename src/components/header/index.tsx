@@ -26,8 +26,6 @@ function Header() {
   const [showModalAddress, setShowModalAddress] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const isSeller = localStorage.getItem("@motorsShop:isSeller");
-
   const handleHeaderMenu = () => {
     setHeaderMenuName(!headerMenuName);
 
