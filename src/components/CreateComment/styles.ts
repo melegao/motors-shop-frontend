@@ -116,3 +116,12 @@ export const Container = styled.form`
     }
   }
 `;
+
+export const NotLogin = styled.div`
+  background-color: var(--grey10);
+  display: flex;
+  align-items: center;
+  padding: 36px 28px;
+  border-radius: 4px;
+  height: 50px;
+`;
