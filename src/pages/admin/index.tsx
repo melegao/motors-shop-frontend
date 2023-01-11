@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AuctionList from "../../components/AuctionList";
 import CarouselAdmin from "../../components/CarouselAdmin";
 import CreateProductModal from "../../components/CreateProductModal";
 import Footer from "../../components/Footer";
@@ -10,8 +11,8 @@ function Admin() {
   const [showCreateVehicleModal, setShowCreateVehicleModal] = useState(false);
 
   const { user } = useVehicleContext();
-  
-  const id = localStorage.getItem("@motorsShop:userId")
+
+  const id = localStorage.getItem("@motorsShop:userId");
 
   return (
     <>
@@ -42,17 +43,17 @@ function Admin() {
 
           <div className="auction">
             <h3>Leilão</h3>
-            <div>CARROSSEL</div>
+            <div>Você não possui veículo para Leilão.</div>
           </div>
 
           <div className="cars">
             <h3>Carros</h3>
-            <CarouselAdmin props="car" id={id}/>
+            <CarouselAdmin props="car" id={id} />
           </div>
 
           <div className="motorcycles">
             <h3>Motos</h3>
-            <CarouselAdmin props="motorcycle" id={id}/>
+            <CarouselAdmin props="motorcycle" id={id} />
           </div>
         </Content>
       </Container>

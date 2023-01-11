@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { HashLink } from "react-router-hash-link";
 import AuctionList from "../../components/AuctionList";
 import { Button } from "../../components/Button/style";
 import CarouselProducts from "../../components/CarouselProducts";
@@ -27,20 +28,36 @@ function Home() {
           <h2>Velocidade e experiência em um lugar feito para você</h2>
           <h3>Um ambiente feito para você explorar o seu melhor</h3>
           <div>
-            <Button colorbutton="BrandNew">Carros</Button>
-            <Button colorbutton="BrandNew">Motos</Button>
+            <Button
+              width="100%"
+              colorbutton="BrandNew"
+              className="text-decoration"
+            >
+              <HashLink smooth to="/#car-list">
+                Carros
+              </HashLink>
+            </Button>
+            <Button
+              width="100%"
+              colorbutton="BrandNew"
+              className="text-decoration"
+            >
+              <HashLink smooth to="/#motorcycle-list">
+                Motos
+              </HashLink>
+            </Button>
           </div>
         </div>
-        <div className="div-leilao">
+        <div className="div-leilao" id="auction-list">
           <h3>Leilão</h3>
           <AuctionList />
         </div>
 
-        <div className="div-carros">
+        <div className="div-carros" id="car-list">
           <h3>Carros</h3>
           <CarouselProducts props="car" arr={allVehicles} />
         </div>
-        <div className="div-motos">
+        <div className="div-motos" id="motorcycle-list">
           <h3>Motos</h3>
           <CarouselProducts props="motorcycle" arr={allVehicles} />
         </div>

@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import EditUserModal from "../EditUserModal";
 import { SuccessModal } from "../Modal";
 import EditAddressModal from "../EditAdressModal";
+import { HashLink } from "react-router-hash-link";
 
 function Header() {
   const navigate = useNavigate();
@@ -85,11 +86,23 @@ function Header() {
         <div className="line2"></div>
         <div className="line3"></div>
       </div>
-      <div className={className}>
+      <div className={`${className} text-decoration`}>
         <ul>
-          <li>Carros</li>
-          <li>Motos</li>
-          <li>Leilão</li>
+          <li>
+            <HashLink smooth to="/#car-list">
+              Carros
+            </HashLink>
+          </li>
+          <li>
+            <HashLink smooth to="/#motorcycle-list">
+              Motos
+            </HashLink>
+          </li>
+          <li>
+            <HashLink smooth to="/#auction-list">
+              Leilão
+            </HashLink>
+          </li>
         </ul>
 
         {logged ? (
