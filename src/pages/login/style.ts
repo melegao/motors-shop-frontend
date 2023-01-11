@@ -2,8 +2,11 @@ import styled from "styled-components";
 
 export const ColorContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: var(--grey5);
+  .teste {
+    height: 100vh;
+  }
 `;
 export const LoginContainer = styled.div`
   width: 100%;

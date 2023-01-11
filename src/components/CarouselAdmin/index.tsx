@@ -5,27 +5,30 @@ import api from "../../services/api";
 // import CardProdutOwner from "../CardProductOwner";
 import CardProductAdmin from "../CardProductAdmin";
 import { CheckTypeContext } from "../../context/CheckTypeContext";
+import { UpdateApiContext } from "../../context/UpdateApi";
 
 function CarouselAdmin({ props, id }: any) {
   const [userInfo, setUserInfo] = useState<IUser | undefined>();
+  const [state, setState] = useState({} as any);
 
-  const { isBikes, isCar, isCarOrBikesExists } = useContext(CheckTypeContext);
+  const { isCarOrBikesExists } = useContext(CheckTypeContext);
+  const { updateApi } = useContext(UpdateApiContext);
 
   useEffect(() => {
     api
       .get(`users/${id}`)
       .then((res) => {
         setUserInfo(res.data);
-        isCarOrBikesExists(res.data.vehicle);
+        setState(isCarOrBikesExists(res.data.vehicle));
       })
       .catch((err) => console.log(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [updateApi]);
 
   return (
     <CarouselProductsContainer>
       {props === "car" ? (
-        !isCar ? (
+        !state.car ? (
           <p>Nenhum Carro Cadastrado</p>
         ) : (
           userInfo?.vehicle?.map(
@@ -40,7 +43,7 @@ function CarouselAdmin({ props, id }: any) {
               )
           )
         )
-      ) : !isBikes ? (
+      ) : !state.bike ? (
         <p>Nenhuma Moto Cadastrada</p>
       ) : (
         userInfo?.vehicle?.map(
