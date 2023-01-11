@@ -13,22 +13,19 @@ function CarouselProductsOwner({ props, id }: any) {
   useEffect(() => {
     api
       .get(`users/${id}`)
-      .then((res) => setUserInfo(res.data))
+      .then((res) => {
+        setUserInfo(res.data);
+        isCarOrBikesExists(res.data.vehicle);
+      })
       .catch((err) => console.log(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (userInfo !== undefined) {
-      isCarOrBikesExists(userInfo.vehicle);
-    }
-  }, [userInfo, isCarOrBikesExists]);
 
   return (
     <CarouselProductsContainer>
       {props === "car" ? (
         !isCar ? (
-          <h3>Nenhum Carro Cadastrado</h3>
+          <p>Nenhum Carro Cadastrado</p>
         ) : (
           userInfo?.vehicle?.map(
             (elem) =>
@@ -43,7 +40,7 @@ function CarouselProductsOwner({ props, id }: any) {
           )
         )
       ) : !isBikes ? (
-        <h3>Nenhuma Moto Cadastrada</h3>
+        <p>Nenhuma Moto Cadastrada</p>
       ) : (
         userInfo?.vehicle?.map(
           (elem) =>

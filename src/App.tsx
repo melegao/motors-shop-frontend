@@ -10,15 +10,15 @@ import GlobalStyle from "./styles/global";
 function App() {
   return (
     <>
-      <CheckTypeProvider>
-        <EditProfileProvider>
-          <VehicleProvider>
+      <EditProfileProvider>
+        <VehicleProvider>
+          <CheckTypeProvider>
             <GlobalStyle />
             <Ways />
             <ToastContainer />
-          </VehicleProvider>
-        </EditProfileProvider>
-      </CheckTypeProvider>
+          </CheckTypeProvider>
+        </VehicleProvider>
+      </EditProfileProvider>
     </>
   );
 }
