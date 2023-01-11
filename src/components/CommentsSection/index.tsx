@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { CheckCommentContext } from "../../context/CheckComment";
 import { IVehicleComment } from "../../interfaces/vehicle.interfaces";
 import api from "../../services/api";
 import CommentCard from "../CommentCard";
@@ -11,6 +12,7 @@ interface CommentProps {
 
 function CommentSection({ id }: CommentProps) {
   const [vehicleComments, setVehicleComments] = useState<IVehicleComment[]>([]);
+  const { isComment } = useContext(CheckCommentContext);
 
   useEffect(() => {
     api
@@ -24,7 +26,7 @@ function CommentSection({ id }: CommentProps) {
         toast.error("Comentários não foram carregados");
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isComment]);
 
   return (
     <Container>
