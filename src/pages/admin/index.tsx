@@ -1,5 +1,4 @@
 import { useState } from "react";
-import AuctionList from "../../components/AuctionList";
 import CarouselAdmin from "../../components/CarouselAdmin";
 import CreateProductModal from "../../components/CreateProductModal";
 import Footer from "../../components/Footer";

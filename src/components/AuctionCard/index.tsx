@@ -18,7 +18,7 @@ function AuctionCard({ car }: any) {
         <h2>{car.name}</h2>
         <p className="description">{car.description}</p>
         <p className="owner">
-          <span>{car.owner.slice(0, 1)}</span>
+          <span>{car.initials}</span>
           {car.owner}
         </p>
         <div className="carInfo">

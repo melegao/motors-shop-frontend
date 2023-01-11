@@ -5,6 +5,7 @@ import Car2 from "../../assets/images/car2.svg";
 
 export interface IAuctionVehicle {
   name: string;
+  initials: string;
   description: string;
   km: string;
   year: number;
@@ -17,6 +18,7 @@ export interface IAuctionVehicle {
 const carsList: IAuctionVehicle[] = [
   {
     name: "Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes",
+    initials: "MS",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio magni consequuntur ratione laudantium.",
     km: "0",
@@ -27,6 +29,7 @@ const carsList: IAuctionVehicle[] = [
   },
   {
     name: "BMW M4 2022 Limited Edition",
+    initials: "AM",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio magni consequuntur ratione laudantium.",
     km: "0",
@@ -37,6 +40,7 @@ const carsList: IAuctionVehicle[] = [
   },
   {
     name: "Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes",
+    initials: "GC",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio magni consequuntur ratione laudantium.",
     km: "0",

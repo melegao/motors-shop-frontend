@@ -7,6 +7,7 @@ import Footer from "../../components/Footer";
 import api from "../../services/api";
 import CreateComment from "../../components/CreateComment";
 import CommentSection from "../../components/CommentsSection";
+import { userInitials } from "../../utils/userInitials";
 
 function ProductDetails() {
   interface IVehicle {
@@ -33,12 +34,14 @@ function ProductDetails() {
   const navigate = useNavigate();
 
   const [vehicle, setVehicle] = useState<IVehicle>();
+  const [ownerName, setOwnerName] = useState("");
 
   useEffect(() => {
     api
       .get(`vehicles/${id}`)
       .then((res) => {
         setVehicle(res.data);
+        setOwnerName(res.data.user.fullName);
       })
       .catch((err) => console.log(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -137,7 +140,7 @@ function ProductDetails() {
           </div>
           <div className="div-seller-desktop">
             <div className="seller-photo">
-              <p>SL</p>
+              <p>{userInitials(ownerName)}</p>
             </div>
             <h2>{vehicle?.user.fullName}</h2>
             <p>{vehicle?.user.description}</p>
