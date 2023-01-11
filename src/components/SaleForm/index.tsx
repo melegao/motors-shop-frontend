@@ -114,10 +114,7 @@ function SaleForm({ setShowCreateVehicleModal }: any) {
 
         setTimeout(() => setShowCreateVehicleModal(false), 2000);
       })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Algo deu errado");
-      });
+      .catch((err) => console.log("Tente novamente mais tarde."));
   };
 
   return (

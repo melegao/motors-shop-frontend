@@ -20,7 +20,8 @@ function EditSaleForm({
     api
       .get(`vehicles/${productId}`)
       .then((res) => setVehicleInfo(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Tente novamente mais tarde."));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const userToken = localStorage.getItem("@motorsShop:token");
@@ -129,10 +130,7 @@ function EditSaleForm({
           setShowEditProductModal(false);
         }, 2000);
       })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Algo deu errado");
-      });
+      .catch((err) => console.log("Tente novamente mais tarde."));
   };
 
   const handleDeleteButton = () => {

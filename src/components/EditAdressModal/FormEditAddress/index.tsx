@@ -26,7 +26,7 @@ export const FormEditAddress: React.FC<IModal> = ({
     api
       .get(`users/${id}`)
       .then((res) => setUserAddress(res.data.address))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Tente novamente mais tarde."));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -55,7 +55,6 @@ export const FormEditAddress: React.FC<IModal> = ({
   } = useForm({ resolver: yupResolver(schema), reValidateMode: "onSubmit" });
 
   const onSubmit = (data: object) => {
-
     const fixedData = checkInfos(data, userAddress);
     editProfile(id!, fixedData, true);
 
