@@ -1,5 +1,4 @@
 import { useState } from "react";
-import AuctionList from "../../components/AuctionList";
 import CarouselAdmin from "../../components/CarouselAdmin";
 import CreateProductModal from "../../components/CreateProductModal";
 import Footer from "../../components/Footer";
@@ -27,7 +26,11 @@ function Admin() {
           <UserDiv>
             <BlueDiv />
             <div className="userInfo">
-              <div className="photo">SL</div>
+              <div className="photo">{`${user?.fullName.split(" ")[0][0]}${
+                user?.fullName.split(" ")[
+                  user?.fullName.split(" ").length - 1
+                ][0]
+              }`}</div>
               <h2 className="nameTitle">
                 {user?.fullName} <span>Anunciante</span>
               </h2>

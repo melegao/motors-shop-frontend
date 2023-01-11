@@ -4,6 +4,7 @@ import { Button } from "../Button/style";
 import { useState } from "react";
 import EditProductModal from "../EditProductModal";
 import { DeleteModal } from "../Modal";
+import { userInitials } from "../../utils/userInitials";
 
 function CardProductAdmin({ product, sellerName, sellerId }: any) {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ function CardProductAdmin({ product, sellerName, sellerId }: any) {
       <p className="product-description">{product.description}</p>
       <div className="div-product-owner">
         <div className="owner-initials" onClick={() => handleClickSeller()}>
-          <p>SL</p>
+          <p>{userInitials(sellerName)}</p>
         </div>
         <p className="owner-name" onClick={() => handleClickSeller()}>
           {sellerName}

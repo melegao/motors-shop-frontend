@@ -13,7 +13,7 @@ import { HashLink } from "react-router-hash-link";
 function Header() {
   const navigate = useNavigate();
 
-  const { logged, user, setLogged } = useVehicleContext();
+  const { logged, setLogged, user } = useVehicleContext();
 
   const [headerMenuName, setHeaderMenuName] = useState(true);
   const [className, setClassName] = useState("header-menu");
@@ -108,6 +108,11 @@ function Header() {
         {logged ? (
           <>
             <div className="login-area" onClick={() => changeLoggedMenu()}>
+              <span>{`${user?.fullName.split(" ")[0][0]}${
+                user?.fullName.split(" ")[
+                  user?.fullName.split(" ").length - 1
+                ][0]
+              }`}</span>
               {user?.fullName}
             </div>
             <div className={classNameLoggedMenu}>
