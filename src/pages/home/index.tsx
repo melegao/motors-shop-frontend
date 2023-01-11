@@ -30,7 +30,7 @@ function Home() {
           <div>
             <Button
               width="100%"
-              colorbutton="BrandNew"
+              colorbutton="Brand2"
               className="text-decoration"
             >
               <HashLink smooth to="/#car-list">
@@ -39,7 +39,7 @@ function Home() {
             </Button>
             <Button
               width="100%"
-              colorbutton="BrandNew"
+              colorbutton="Brand2"
               className="text-decoration"
             >
               <HashLink smooth to="/#motorcycle-list">
