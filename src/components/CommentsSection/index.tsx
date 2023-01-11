@@ -36,6 +36,7 @@ function CommentSection({ id }: CommentProps) {
         vehicleComments.map((elem) => (
           <CommentCard
             key={elem.id}
+            commentId={elem.id}
             userName={elem.user.fullName}
             commentDate={elem.createdAt}
             text={elem.text}
