@@ -8,14 +8,16 @@ import { CheckTypeContext } from "../../context/CheckTypeContext";
 function CarouselProductsOwner({ props, id }: any) {
   const [userInfo, setUserInfo] = useState<IUser | undefined>();
 
-  const { isBikes, isCar, isCarOrBikesExists } = useContext(CheckTypeContext);
+  const [state, setState] = useState({} as any);
+
+  const { isCarOrBikesExists } = useContext(CheckTypeContext);
 
   useEffect(() => {
     api
       .get(`users/${id}`)
       .then((res) => {
         setUserInfo(res.data);
-        isCarOrBikesExists(res.data.vehicle);
+        setState(isCarOrBikesExists(res.data.vehicle));
       })
       .catch((err) => console.log(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -24,7 +26,7 @@ function CarouselProductsOwner({ props, id }: any) {
   return (
     <CarouselProductsContainer>
       {props === "car" ? (
-        !isCar ? (
+        !state.car ? (
           <p>Nenhum Carro Cadastrado</p>
         ) : (
           userInfo?.vehicle?.map(
@@ -39,7 +41,7 @@ function CarouselProductsOwner({ props, id }: any) {
               )
           )
         )
-      ) : !isBikes ? (
+      ) : !state.bike ? (
         <p>Nenhuma Moto Cadastrada</p>
       ) : (
         userInfo?.vehicle?.map(
