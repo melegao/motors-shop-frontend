@@ -5,12 +5,14 @@ import api from "../../services/api";
 // import CardProdutOwner from "../CardProductOwner";
 import CardProductAdmin from "../CardProductAdmin";
 import { CheckTypeContext } from "../../context/CheckTypeContext";
+import { UpdateApiContext } from "../../context/UpdateApi";
 
 function CarouselAdmin({ props, id }: any) {
   const [userInfo, setUserInfo] = useState<IUser | undefined>();
   const [state, setState] = useState({} as any);
 
   const { isCarOrBikesExists } = useContext(CheckTypeContext);
+  const { updateApi } = useContext(UpdateApiContext);
 
   useEffect(() => {
     api
@@ -21,7 +23,7 @@ function CarouselAdmin({ props, id }: any) {
       })
       .catch((err) => console.log(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [updateApi]);
 
   return (
     <CarouselProductsContainer>
