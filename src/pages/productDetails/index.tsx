@@ -43,7 +43,7 @@ function ProductDetails() {
         setVehicle(res.data);
         setOwnerName(res.data.user.fullName);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Tente novamente mais tarde."));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

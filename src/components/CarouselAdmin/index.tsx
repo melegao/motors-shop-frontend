@@ -2,7 +2,6 @@ import { CarouselProductsContainer } from "./style";
 import { useContext, useEffect, useState } from "react";
 import { IUser } from "../../context/ProductContext";
 import api from "../../services/api";
-// import CardProdutOwner from "../CardProductOwner";
 import CardProductAdmin from "../CardProductAdmin";
 import { CheckTypeContext } from "../../context/CheckTypeContext";
 import { UpdateApiContext } from "../../context/UpdateApi";
@@ -21,7 +20,7 @@ function CarouselAdmin({ props, id }: any) {
         setUserInfo(res.data);
         setState(isCarOrBikesExists(res.data.vehicle));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Tente novamente mais tarde."));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateApi]);
 

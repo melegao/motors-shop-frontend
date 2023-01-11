@@ -1,15 +1,12 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "../pages/home";
 import ProductDetails from "../pages/productDetails";
 import { LoginPage } from "../pages/login";
 import Admin from "../pages/admin";
 import ProfileViewUser from "../pages/profileViewUser";
 import { SignInPage } from "../pages/signIn";
-import { useEffect } from "react";
 
 function Ways() {
-
-
   return (
     <>
       <Routes>

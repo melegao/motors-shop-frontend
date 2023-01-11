@@ -27,7 +27,7 @@ export const FormEditComment: React.FC<IModalComment> = ({
         .then((res) => {
           setComment(res.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log("Tente novamente mais tarde."));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -53,7 +53,7 @@ export const FormEditComment: React.FC<IModalComment> = ({
         setShowSuccessModal(true);
         setIsComment(!isComment);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Tente novamente mais tarde."));
   };
 
   useEffect(() => {

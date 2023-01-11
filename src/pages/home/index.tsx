@@ -16,7 +16,7 @@ function Home() {
     api
       .get(`/vehicles`)
       .then((res) => setAllVehicles(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Tente novamente mais tarde."));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

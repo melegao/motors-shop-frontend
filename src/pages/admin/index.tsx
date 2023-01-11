@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CarouselAdmin from "../../components/CarouselAdmin";
 import CreateProductModal from "../../components/CreateProductModal";
 import Footer from "../../components/Footer";
@@ -7,11 +8,19 @@ import { useVehicleContext } from "../../context/ProductContext";
 import { BlueDiv, Container, Content, UserDiv } from "./styles";
 
 function Admin() {
+  const navigate = useNavigate();
   const [showCreateVehicleModal, setShowCreateVehicleModal] = useState(false);
 
-  const { user } = useVehicleContext();
+  const { user, logged } = useVehicleContext();
 
   const id = localStorage.getItem("@motorsShop:userId");
+
+  useEffect(() => {
+    if (!logged || !user?.isSeller) {
+      navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

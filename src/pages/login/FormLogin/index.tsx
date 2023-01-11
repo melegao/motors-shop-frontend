@@ -47,7 +47,7 @@ export const FormLogin = () => {
     api
       .get(`users/${data.userId}`)
       .then((res) => setUser(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Tente novamente mais tarde."));
 
     setTimeout(() => {
       setLogged(true);
@@ -91,9 +91,7 @@ export const FormLogin = () => {
           width="50%"
           sizebutton="login"
           type="button"
-          onClick={() => {
-            console.log("Pagina de Esqueci senha");
-          }}
+          onClick={() => toast.error("Esqueceu a senha?")}
         >
           Esqueci minha senha
         </ButtonBase>

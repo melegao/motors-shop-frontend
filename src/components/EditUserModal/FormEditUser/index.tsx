@@ -24,7 +24,7 @@ export const FormEditUser: React.FC<IModal> = ({
     api
       .get(`users/${id}`)
       .then((res) => setUser(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Tente novamente mais tarde."));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -68,7 +68,6 @@ export const FormEditUser: React.FC<IModal> = ({
   } = useForm({ resolver: yupResolver(schema), reValidateMode: "onSubmit" });
 
   const onSubmit = (data: object) => {
-
     const fixedData = checkInfos(data, user);
     editProfile(id!, fixedData, false);
     setShowModal(false);

@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
+
 import api from "../services/api";
 
 interface ProviderProps {
@@ -85,7 +86,7 @@ export function VehicleProvider({ children }: ProviderProps) {
         .then((res) => {
           setUser(res.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log("Tente novamente mais tarde."));
     }
   }, []);
 

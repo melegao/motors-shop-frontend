@@ -33,7 +33,7 @@ function CommentCard({ userName, commentDate, text, commentId }: CommentProps) {
         .then((res) => {
           setComment(res.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log("Tente novamente mais tarde."));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -47,7 +47,7 @@ function CommentCard({ userName, commentDate, text, commentId }: CommentProps) {
         toast.success("Comentario deletado com Sucesso");
         setIsComment(!isComment);
       })
-      .catch((err) => toast.error("Comentario NÃO foi deletado"));
+      .catch((err) => toast.error("Comentario não foi deletado"));
   };
 
   return (

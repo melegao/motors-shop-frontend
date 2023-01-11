@@ -28,7 +28,7 @@ const CreateComment = () => {
       api
         .get(`users/${userId}`)
         .then((res) => setUser(res.data))
-        .catch((err) => console.log(err));
+        .catch((err) => console.log("Tente novamente mais tarde."));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -46,10 +46,7 @@ const CreateComment = () => {
         toast.success("Comentário criado com sucesso!");
         setIsComment(!isComment);
       })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Algo deu errado");
-      });
+      .catch((err) => console.log("Tente novamente mais tarde."));
   };
 
   function handleChange(e: any) {
