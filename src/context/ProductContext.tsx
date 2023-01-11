@@ -76,14 +76,15 @@ export function VehicleProvider({ children }: ProviderProps) {
   const [user, setUser] = useState<IUser>();
 
   useEffect(() => {
-    
-    const userId = localStorage.getItem("@motorsShop:userId")
+    const userId = localStorage.getItem("@motorsShop:userId");
 
     if (userId) {
       setLogged(true);
       api
         .get(`users/${userId}`)
-        .then((res) => setUser(res.data))
+        .then((res) => {
+          setUser(res.data);
+        })
         .catch((err) => console.log(err));
     }
   }, []);
