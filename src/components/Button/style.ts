@@ -61,6 +61,22 @@ export const Button = styled.button<ButtonProps>`
           }
         `;
 
+      case "Brand2":
+        return css`
+          color: var(--whiteFixed);
+          background-color: var(--brand2);
+          border: 1px solid var(--grey10);
+
+          &:hover {
+            background-color: var(--grey10);
+            border: 1px solid var(--grey10);
+
+            a {
+              color: var(--grey1);
+            }
+          }
+        `;
+
       case "BrandNew":
         return css`
           color: var(--whiteFixed);
