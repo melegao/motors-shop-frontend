@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { CheckCommentContext } from "../../context/CheckComment";
 import api from "../../services/api";
-import { Button } from "../Button/style";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import EditCommentModal from "../EditCommentModal";
 import { SuccessModal } from "../Modal";
 import { CommentDiv } from "./styles";
@@ -77,8 +77,17 @@ function CommentCard({ userName, commentDate, text, commentId }: CommentProps) {
       <div className="text">{text}</div>
       {comment.user?.id === userId && (
         <>
-          <Button onClick={() => setShowModal(true)}>Editar</Button>
-          <Button onClick={() => deleteComment(comment.id)}>Deletar</Button>
+          <div className="buttons">
+            <button className="editButton" onClick={() => setShowModal(true)}>
+              <AiFillEdit size={20} />
+            </button>
+            <button
+              className="deleteButton"
+              onClick={() => deleteComment(comment.id)}
+            >
+              <AiFillDelete size={20} />
+            </button>
+          </div>
         </>
       )}
     </CommentDiv>

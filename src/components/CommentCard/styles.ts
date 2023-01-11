@@ -51,4 +51,50 @@ export const CommentDiv = styled.div`
 
     color: var(--grey2);
   }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    .editButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 30px;
+      height: 30px;
+
+      background-color: var(--grey10);
+      border: none;
+      border-radius: 4px;
+
+      color: var(--grey2);
+
+      &:hover {
+        background-color: var(--grey2);
+        color: var(--grey10);
+      }
+    }
+
+    .deleteButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 30px;
+      height: 30px;
+
+      background-color: var(--grey10);
+      border: none;
+      border-radius: 4px;
+
+      color: var(--alert1);
+
+      &:hover {
+        background-color: var(--alert1);
+        color: var(--whiteFixed);
+      }
+    }
+  }
 `;

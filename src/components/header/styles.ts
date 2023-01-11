@@ -16,6 +16,21 @@ export const ContainerHeader = styled.div`
     }
   }
 
+  .login-area {
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background-color: var(--brand1);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+
+      color: var(--whiteFixed);
+    }
+  }
+
   @media (min-width: 800px) {
     display: flex;
     justify-content: space-between;
@@ -56,19 +71,6 @@ export const ContainerHeader = styled.div`
       gap: 15px;
       padding-left: 44px;
       cursor: pointer;
-
-      span {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        background-color: var(--brand1);
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-
-        color: var(--whiteFixed);
-      }
 
       p {
         cursor: pointer;
