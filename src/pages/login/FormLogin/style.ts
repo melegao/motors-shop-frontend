@@ -12,7 +12,6 @@ export const StyledForm = styled.form`
 
   .title--login {
     width: 50%;
-
     display: flex;
   }
 

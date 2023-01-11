@@ -3,9 +3,10 @@ import { Form } from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import { UpdateApiContext } from "../../context/UpdateApi";
 
 function EditSaleForm({
   setShowEditProductModal,
@@ -14,7 +15,7 @@ function EditSaleForm({
 }: any) {
   const [vehicleType, setVehicleType] = useState("car");
   const [vehicleInfo, setVehicleInfo] = useState<IVehicleRegister>();
-
+  const { setUpdateApi, updateApi } = useContext(UpdateApiContext);
   useEffect(() => {
     api
       .get(`vehicles/${productId}`)
@@ -123,8 +124,10 @@ function EditSaleForm({
       })
       .then((res) => {
         toast.success("Anúncio atualizado com sucesso!");
-
-        setTimeout(() => setShowEditProductModal(false), 2000);
+        setTimeout(() => {
+          setUpdateApi(!updateApi);
+          setShowEditProductModal(false);
+        }, 2000);
       })
       .catch((err) => {
         console.log(err);
