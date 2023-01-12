@@ -12,6 +12,12 @@ export const HomeContainer = styled.div`
 
       color: var(--whiteFixed);
     }
+
+    &:hover {
+      a {
+        color: var(--grey1);
+      }
+    }
   }
 
   @media (max-width: 800px) {
