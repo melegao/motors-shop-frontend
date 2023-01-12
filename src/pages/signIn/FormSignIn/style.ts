@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
-  width: 70%;
+  width: 75%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,13 +12,13 @@ export const StyledForm = styled.form`
 
   .title--signIn,
   .subTitle {
-    width: 70%;
+    width: 75%;
     display: flex;
   }
   input,
   .label--input,
   .label--error {
-    width: 70%;
+    width: 75%;
   }
   input {
     color: var(--random13);
@@ -40,7 +40,7 @@ export const StyledForm = styled.form`
   }
 
   button {
-    width: 70%;
+    width: 75%;
     height: 48px;
   }
 
@@ -71,7 +71,7 @@ export const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    width: 70%;
+    width: 75%;
 
     label {
       font-size: 0.875rem;

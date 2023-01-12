@@ -11,7 +11,7 @@ export const StyledForm = styled.form`
   border-radius: 4px;
 
   .title--login {
-    width: 50%;
+    width: 75%;
     display: flex;
   }
 

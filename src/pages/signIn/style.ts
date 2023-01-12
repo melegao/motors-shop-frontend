@@ -7,7 +7,7 @@ export const ColorContainer = styled.div`
 `;
 export const SignInContainer = styled.div`
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   margin: 46px auto 10% auto;
   border-radius: 4px;
   display: flex;
