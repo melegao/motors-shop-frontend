@@ -3,12 +3,15 @@ import { Form } from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import { UpdateApiContext } from "../../context/UpdateApi";
 
 function SaleForm({ setShowCreateVehicleModal }: any) {
   const [vehicleType, setVehicleType] = useState("car");
+
+  const { updateApi, setUpdateApi } = useContext(UpdateApiContext);
 
   const userToken = localStorage.getItem("@motorsShop:token");
 
@@ -112,7 +115,10 @@ function SaleForm({ setShowCreateVehicleModal }: any) {
       .then((res) => {
         toast.success("Anúncio criado com sucesso!");
 
-        setTimeout(() => setShowCreateVehicleModal(false), 2000);
+        setTimeout(() => {
+          setUpdateApi(!updateApi);
+          setShowCreateVehicleModal(false);
+        }, 2000);
       })
       .catch((err) => console.log("Tente novamente mais tarde."));
   };
