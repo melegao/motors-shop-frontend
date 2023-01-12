@@ -4,10 +4,18 @@ export const ColorContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: var(--grey5);
-  .teste {
+  .login-container {
     height: 100vh;
+    width: 300px;
+  }
+
+  @media (min-width: 425px) {
+    .login-container {
+      width: 412px;
+    }
   }
 `;
+
 export const LoginContainer = styled.div`
   width: 100%;
   max-width: 1024px;

@@ -68,7 +68,7 @@ export const FormLogin = () => {
         </div>
 
         <InputBase
-          width="50%"
+          width="75%"
           type="text"
           label="Usuário"
           placeholder="Digitar usuário"
@@ -77,7 +77,7 @@ export const FormLogin = () => {
           error={errors?.email?.message}
         ></InputBase>
         <InputBase
-          width="50%"
+          width="75%"
           type="password"
           label="Senha"
           register={register}
@@ -88,20 +88,20 @@ export const FormLogin = () => {
 
         <ButtonBase
           colorbutton="LightLogin"
-          width="50%"
+          width="75%"
           sizebutton="login"
           type="button"
           onClick={() => toast.error("Esqueceu a senha?")}
         >
           Esqueci minha senha
         </ButtonBase>
-        <ButtonBase type="submit" colorbutton="Brand" width="50%">
+        <ButtonBase type="submit" colorbutton="Brand" width="75%">
           Entrar
         </ButtonBase>
         <p className="text--register">Ainda não possui conta?</p>
         <ButtonBase
           colorbutton="Outline2"
-          width="50%"
+          width="75%"
           type="button"
           onClick={() => navigate("/sign")}
         >

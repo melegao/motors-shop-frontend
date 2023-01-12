@@ -8,7 +8,7 @@ export const LoginPage = () => {
     <>
       <ColorContainer>
         <Header />
-        <LoginContainer className="teste">
+        <LoginContainer className="login-container">
           <FormLogin />
         </LoginContainer>
         <Footer />
