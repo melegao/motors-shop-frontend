@@ -1,46 +1,62 @@
-# Getting Started with Create React App
+# Aplicação Backend - Contact
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. Visão Geral
 
-## Available Scripts
+### 1.1 Sobre o projeto
 
-In the project directory, you can run:
+Este é um projeto que se trata de um E-commerce para Carros e Motos.
 
-### `yarn start`
+O principal objetivo é facilitar a venda ou compra de veículo de um usuário para outro usuário, \
+disponibilizando uma maneira de alcançar mais interessados.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Caso queira comprar um veículo, basta criar uma conta do tipo "Comprador". \
+Para vender um veículo, é necessário criar uma conta do tipo "Anunciante".
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 1.2 Tecnologias
 
-### `yarn test`
+Visão geral do projeto, um pouco das tecnologias usadas.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [ReactJS](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [React Router Dom](https://reactrouter.com/en/main)
+- [React Hook Form](https://react-hook-form.com/)
+- [Styled Components](https://styled-components.com/)
+- [React Toastify](https://fkhadra.github.io/react-toastify/introduction)
+- [Axios](https://axios-http.com/ptbr/docs/intro)
+- [React Icons](https://react-icons.github.io/react-icons/)
 
-### `yarn build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 2. Passo a passo para instalação:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2.1. Instalando Dependências
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Após clonar o repositório, acesse a pasta do projeto Frontend, e então execute o comando abaixo para instalar as dependências:
 
-### `yarn eject`
+```bash
+yarn
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 2.2. Rodando a aplicação
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Após isso basta executar o comando abaixo para rodar a aplicação:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+yarn start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Rodará a aplicação no modo de desenvolvimento.
+Abra [http://localhost:3000](http://localhost:3000) para ver o projeto no navegador.
 
-## Learn More
+Caso você faça alguma edição, a página irá recarregar.\
+Você também verá alguns avisos de erros no console.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Prontinho, agora você pode explorar o projeto.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 2. Aprenda mais
+
+Você pode aprender mais em [Criar React App (Documentação)](https://facebook.github.io/create-react-app/docs/getting-started).
+
+Para aprender React, visite o site [Documentação React](https://reactjs.org/).
+
+Obrigado.

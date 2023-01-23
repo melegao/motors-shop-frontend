@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
     * {
@@ -42,6 +42,8 @@ export default createGlobalStyle`
         --random10: #6100FF;
         --random11: #5700E3;
         --random12: #30007D;
+        --random13: #757575 ;
+        --black: #000
     }
     body{
         background-color: #fff;
@@ -49,7 +51,7 @@ export default createGlobalStyle`
     }
 
     body, input, button {
-        font-family: 'Inter', serif;
+        font-family: 'Inter', sans-serif;
         font-size: 1rem;
     }
 
@@ -60,4 +62,8 @@ export default createGlobalStyle`
     a {
         text-decoration: none;
     }
-`
+
+    ol, ul {
+        list-style: none;
+    }
+`;
